@@ -1,0 +1,947 @@
+<?xml version="1.0"?>
+<PMML version="4.4.1" xmlns="http://www.dmg.org/PMML-4_4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dmg.org/PMML-4_4 http://www.dmg.org/pmml/v4-4/pmml-4-4.xsd">
+ <Header copyright="Copyright (c) 2021 azrul" description="RPart Decision Tree Model">
+  <Extension name="user" value="azrul" extender="SoftwareAG PMML Generator"/>
+  <Application name="SoftwareAG PMML Generator" version="2.4.0"/>
+  <Timestamp>2021-02-08 11:14:08</Timestamp>
+ </Header>
+ <DataDictionary numberOfFields="68">
+  <DataField name="target" optype="categorical" dataType="boolean">
+   <Value value="FALSE"/>
+   <Value value="TRUE"/>
+  </DataField>
+  <DataField name="loan_amnt" optype="continuous" dataType="double"/>
+  <DataField name="funded_amnt" optype="continuous" dataType="double"/>
+  <DataField name="funded_amnt_inv" optype="continuous" dataType="double"/>
+  <DataField name="term" optype="categorical" dataType="string">
+   <Value value="36 months"/>
+   <Value value="60 months"/>
+  </DataField>
+  <DataField name="int_rate" optype="continuous" dataType="double"/>
+  <DataField name="installment" optype="continuous" dataType="double"/>
+  <DataField name="annual_inc" optype="continuous" dataType="double"/>
+  <DataField name="pymnt_plan" optype="categorical" dataType="string">
+   <Value value="n"/>
+   <Value value="y"/>
+  </DataField>
+  <DataField name="dti" optype="continuous" dataType="double"/>
+  <DataField name="fico_range_low" optype="continuous" dataType="double"/>
+  <DataField name="fico_range_high" optype="continuous" dataType="double"/>
+  <DataField name="open_acc" optype="continuous" dataType="double"/>
+  <DataField name="revol_bal" optype="continuous" dataType="double"/>
+  <DataField name="revol_util" optype="continuous" dataType="double"/>
+  <DataField name="total_acc" optype="continuous" dataType="double"/>
+  <DataField name="out_prncp" optype="continuous" dataType="double"/>
+  <DataField name="out_prncp_inv" optype="continuous" dataType="double"/>
+  <DataField name="total_pymnt" optype="continuous" dataType="double"/>
+  <DataField name="total_pymnt_inv" optype="continuous" dataType="double"/>
+  <DataField name="total_rec_prncp" optype="continuous" dataType="double"/>
+  <DataField name="total_rec_int" optype="continuous" dataType="double"/>
+  <DataField name="total_rec_late_fee" optype="continuous" dataType="double"/>
+  <DataField name="recoveries" optype="continuous" dataType="double"/>
+  <DataField name="collection_recovery_fee" optype="continuous" dataType="double"/>
+  <DataField name="last_pymnt_amnt" optype="continuous" dataType="double"/>
+  <DataField name="last_fico_range_high" optype="continuous" dataType="double"/>
+  <DataField name="last_fico_range_low" optype="continuous" dataType="double"/>
+  <DataField name="application_type" optype="categorical" dataType="string">
+   <Value value="Individual"/>
+   <Value value="Joint App"/>
+  </DataField>
+  <DataField name="tot_cur_bal" optype="continuous" dataType="double"/>
+  <DataField name="open_acc_6m" optype="continuous" dataType="double"/>
+  <DataField name="open_act_il" optype="continuous" dataType="double"/>
+  <DataField name="open_il_24m" optype="continuous" dataType="double"/>
+  <DataField name="total_bal_il" optype="continuous" dataType="double"/>
+  <DataField name="il_util" optype="continuous" dataType="double"/>
+  <DataField name="open_rv_12m" optype="continuous" dataType="double"/>
+  <DataField name="open_rv_24m" optype="continuous" dataType="double"/>
+  <DataField name="max_bal_bc" optype="continuous" dataType="double"/>
+  <DataField name="all_util" optype="continuous" dataType="double"/>
+  <DataField name="total_rev_hi_lim" optype="continuous" dataType="double"/>
+  <DataField name="acc_open_past_24mths" optype="continuous" dataType="double"/>
+  <DataField name="avg_cur_bal" optype="continuous" dataType="double"/>
+  <DataField name="bc_open_to_buy" optype="continuous" dataType="double"/>
+  <DataField name="bc_util" optype="continuous" dataType="double"/>
+  <DataField name="mo_sin_old_rev_tl_op" optype="continuous" dataType="double"/>
+  <DataField name="mo_sin_rcnt_rev_tl_op" optype="continuous" dataType="double"/>
+  <DataField name="mo_sin_rcnt_tl" optype="continuous" dataType="double"/>
+  <DataField name="mort_acc" optype="continuous" dataType="double"/>
+  <DataField name="mths_since_recent_bc" optype="continuous" dataType="double"/>
+  <DataField name="num_actv_bc_tl" optype="continuous" dataType="double"/>
+  <DataField name="num_actv_rev_tl" optype="continuous" dataType="double"/>
+  <DataField name="num_bc_sats" optype="continuous" dataType="double"/>
+  <DataField name="num_bc_tl" optype="continuous" dataType="double"/>
+  <DataField name="num_il_tl" optype="continuous" dataType="double"/>
+  <DataField name="num_op_rev_tl" optype="continuous" dataType="double"/>
+  <DataField name="num_rev_accts" optype="continuous" dataType="double"/>
+  <DataField name="num_rev_tl_bal_gt_0" optype="continuous" dataType="double"/>
+  <DataField name="num_sats" optype="continuous" dataType="double"/>
+  <DataField name="num_tl_op_past_12m" optype="continuous" dataType="double"/>
+  <DataField name="pct_tl_nvr_dlq" optype="continuous" dataType="double"/>
+  <DataField name="percent_bc_gt_75" optype="continuous" dataType="double"/>
+  <DataField name="tot_hi_cred_lim" optype="continuous" dataType="double"/>
+  <DataField name="total_bal_ex_mort" optype="continuous" dataType="double"/>
+  <DataField name="total_bc_limit" optype="continuous" dataType="double"/>
+  <DataField name="total_il_high_credit_limit" optype="continuous" dataType="double"/>
+  <DataField name="hardship_flag" optype="categorical" dataType="string">
+   <Value value="N"/>
+   <Value value="Y"/>
+  </DataField>
+  <DataField name="disbursement_method" optype="categorical" dataType="string">
+   <Value value="Cash"/>
+   <Value value="DirectPay"/>
+  </DataField>
+  <DataField name="debt_settlement_flag" optype="categorical" dataType="string">
+   <Value value="N"/>
+   <Value value="Y"/>
+  </DataField>
+ </DataDictionary>
+ <TreeModel modelName="RPart_Model" functionName="classification" algorithmName="rpart" splitCharacteristic="binarySplit" missingValueStrategy="defaultChild" noTrueChildStrategy="returnLastPrediction">
+  <MiningSchema>
+   <MiningField name="target" usageType="predicted" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="loan_amnt" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="funded_amnt" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="funded_amnt_inv" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="term" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="int_rate" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="installment" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="annual_inc" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="pymnt_plan" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="dti" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="fico_range_low" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="fico_range_high" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="open_acc" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="revol_bal" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="revol_util" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_acc" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="out_prncp" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="out_prncp_inv" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_pymnt" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_pymnt_inv" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_rec_prncp" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_rec_int" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_rec_late_fee" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="recoveries" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="collection_recovery_fee" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="last_pymnt_amnt" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="last_fico_range_high" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="last_fico_range_low" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="application_type" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="tot_cur_bal" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="open_acc_6m" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="open_act_il" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="open_il_24m" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_bal_il" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="il_util" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="open_rv_12m" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="open_rv_24m" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="max_bal_bc" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="all_util" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_rev_hi_lim" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="acc_open_past_24mths" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="avg_cur_bal" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="bc_open_to_buy" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="bc_util" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="mo_sin_old_rev_tl_op" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="mo_sin_rcnt_rev_tl_op" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="mo_sin_rcnt_tl" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="mort_acc" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="mths_since_recent_bc" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_actv_bc_tl" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_actv_rev_tl" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_bc_sats" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_bc_tl" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_il_tl" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_op_rev_tl" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_rev_accts" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_rev_tl_bal_gt_0" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_sats" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="num_tl_op_past_12m" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="pct_tl_nvr_dlq" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="percent_bc_gt_75" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="tot_hi_cred_lim" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_bal_ex_mort" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_bc_limit" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="total_il_high_credit_limit" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="hardship_flag" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="disbursement_method" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="debt_settlement_flag" usageType="active" invalidValueTreatment="returnInvalid"/>
+  </MiningSchema>
+  <Output>
+   <OutputField name="Predicted_target" optype="categorical" dataType="string" feature="predictedValue"/>
+   <OutputField name="Probability_FALSE" optype="continuous" dataType="double" feature="probability" value="FALSE"/>
+   <OutputField name="Probability_TRUE" optype="continuous" dataType="double" feature="probability" value="TRUE"/>
+  </Output>
+  <Node id="1" score="TRUE" recordCount="1921567" defaultChild="3">
+   <True/>
+   <ScoreDistribution value="FALSE" recordCount="259096" confidence="0.134835787667045"/>
+   <ScoreDistribution value="TRUE" recordCount="1662471" confidence="0.865164212332955"/>
+   <Node id="2" score="FALSE" recordCount="157716">
+    <CompoundPredicate booleanOperator="surrogate">
+     <SimplePredicate field="recoveries" operator="greaterOrEqual" value="0.005"/>
+     <SimplePredicate field="collection_recovery_fee" operator="greaterOrEqual" value="9e-04"/>
+     <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+      <Array n="1" type="string">&quot;Y&quot;</Array>
+     </SimpleSetPredicate>
+     <SimplePredicate field="last_fico_range_high" operator="lessThan" value="531.5"/>
+     <SimplePredicate field="last_fico_range_low" operator="lessThan" value="527.5"/>
+     <SimplePredicate field="total_rec_prncp" operator="lessThan" value="52.945"/>
+    </CompoundPredicate>
+    <ScoreDistribution value="FALSE" recordCount="157083" confidence="0.995986456668949"/>
+    <ScoreDistribution value="TRUE" recordCount="633" confidence="0.00401354333105075"/>
+   </Node>
+   <Node id="3" score="TRUE" recordCount="1763851" defaultChild="6">
+    <CompoundPredicate booleanOperator="surrogate">
+     <SimplePredicate field="recoveries" operator="lessThan" value="0.005"/>
+     <SimplePredicate field="collection_recovery_fee" operator="lessThan" value="9e-04"/>
+     <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+      <Array n="1" type="string">&quot;N&quot;</Array>
+     </SimpleSetPredicate>
+     <SimplePredicate field="last_fico_range_high" operator="greaterOrEqual" value="531.5"/>
+     <SimplePredicate field="last_fico_range_low" operator="greaterOrEqual" value="527.5"/>
+     <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="52.945"/>
+    </CompoundPredicate>
+    <ScoreDistribution value="FALSE" recordCount="102013" confidence="0.0578353840545488"/>
+    <ScoreDistribution value="TRUE" recordCount="1661838" confidence="0.942164615945451"/>
+    <Node id="6" score="TRUE" recordCount="150613" defaultChild="12">
+     <CompoundPredicate booleanOperator="surrogate">
+      <SimplePredicate field="last_fico_range_high" operator="lessThan" value="601.5"/>
+      <SimplePredicate field="last_fico_range_low" operator="lessThan" value="597.5"/>
+      <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+       <Array n="1" type="string">&quot;Y&quot;</Array>
+      </SimpleSetPredicate>
+      <SimplePredicate field="total_rec_prncp" operator="lessThan" value="33.35"/>
+      <SimplePredicate field="total_pymnt" operator="lessThan" value="50.43"/>
+      <SimplePredicate field="out_prncp" operator="greaterOrEqual" value="39568.42"/>
+     </CompoundPredicate>
+     <ScoreDistribution value="FALSE" recordCount="65222" confidence="0.433043628372053"/>
+     <ScoreDistribution value="TRUE" recordCount="85391" confidence="0.566956371627947"/>
+     <Node id="12" score="FALSE" recordCount="116045" defaultChild="24">
+      <CompoundPredicate booleanOperator="surrogate">
+       <SimplePredicate field="last_pymnt_amnt" operator="lessThan" value="1424.64"/>
+       <SimplePredicate field="total_rec_prncp" operator="lessThan" value="14999.995"/>
+       <SimplePredicate field="total_pymnt" operator="lessThan" value="34653.7611912963"/>
+       <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="32531.435"/>
+       <SimplePredicate field="installment" operator="lessThan" value="1425.245"/>
+       <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="74.06"/>
+      </CompoundPredicate>
+      <ScoreDistribution value="FALSE" recordCount="64581" confidence="0.556516868456202"/>
+      <ScoreDistribution value="TRUE" recordCount="51464" confidence="0.443483131543798"/>
+      <Node id="24" score="FALSE" recordCount="79817" defaultChild="48">
+       <CompoundPredicate booleanOperator="surrogate">
+        <SimplePredicate field="out_prncp" operator="lessThan" value="0.015"/>
+        <SimplePredicate field="out_prncp_inv" operator="lessThan" value="0.015"/>
+        <SimpleSetPredicate field="application_type" booleanOperator="isIn">
+         <Array n="1" type="string">&quot;Individual&quot;</Array>
+        </SimpleSetPredicate>
+        <SimpleSetPredicate field="hardship_flag" booleanOperator="isIn">
+         <Array n="1" type="string">&quot;N&quot;</Array>
+        </SimpleSetPredicate>
+        <SimpleSetPredicate field="pymnt_plan" booleanOperator="isIn">
+         <Array n="1" type="string">&quot;n&quot;</Array>
+        </SimpleSetPredicate>
+        <SimplePredicate field="total_rec_int" operator="lessThan" value="14413.72"/>
+       </CompoundPredicate>
+       <ScoreDistribution value="FALSE" recordCount="53178" confidence="0.666249044689728"/>
+       <ScoreDistribution value="TRUE" recordCount="26639" confidence="0.333750955310272"/>
+       <Node id="48" score="FALSE" recordCount="41836" defaultChild="97">
+        <CompoundPredicate booleanOperator="surrogate">
+         <SimplePredicate field="total_rec_prncp" operator="lessThan" value="4999.975"/>
+         <SimplePredicate field="total_pymnt" operator="lessThan" value="6658.57006544595"/>
+         <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="6658.57"/>
+         <SimplePredicate field="total_rec_int" operator="lessThan" value="1411.855"/>
+         <SimplePredicate field="installment" operator="lessThan" value="312.8"/>
+         <SimplePredicate field="funded_amnt" operator="lessThan" value="5137.5"/>
+        </CompoundPredicate>
+        <ScoreDistribution value="FALSE" recordCount="35487" confidence="0.848240749593651"/>
+        <ScoreDistribution value="TRUE" recordCount="6349" confidence="0.151759250406349"/>
+        <Node id="96" score="FALSE" recordCount="30905">
+         <CompoundPredicate booleanOperator="surrogate">
+          <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="4987.5"/>
+          <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="4987.5"/>
+          <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="4962.5"/>
+          <SimplePredicate field="installment" operator="greaterOrEqual" value="163.105"/>
+          <SimplePredicate field="last_pymnt_amnt" operator="greaterOrEqual" value="159.36"/>
+          <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="472.795"/>
+         </CompoundPredicate>
+         <ScoreDistribution value="FALSE" recordCount="30901" confidence="0.999870571104999"/>
+         <ScoreDistribution value="TRUE" recordCount="4" confidence="0.000129428895000809"/>
+        </Node>
+        <Node id="97" score="TRUE" recordCount="10931" defaultChild="195">
+         <CompoundPredicate booleanOperator="surrogate">
+          <SimplePredicate field="funded_amnt" operator="lessThan" value="4987.5"/>
+          <SimplePredicate field="loan_amnt" operator="lessThan" value="4987.5"/>
+          <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="4962.5"/>
+          <SimplePredicate field="installment" operator="lessThan" value="163.105"/>
+          <SimplePredicate field="last_pymnt_amnt" operator="lessThan" value="159.36"/>
+          <SimplePredicate field="total_rec_int" operator="lessThan" value="472.795"/>
+         </CompoundPredicate>
+         <ScoreDistribution value="FALSE" recordCount="4586" confidence="0.419540755649071"/>
+         <ScoreDistribution value="TRUE" recordCount="6345" confidence="0.580459244350929"/>
+         <Node id="194" score="FALSE" recordCount="2166">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimplePredicate field="total_rec_prncp" operator="lessThan" value="999.995"/>
+           <SimplePredicate field="total_pymnt" operator="lessThan" value="1173.3532692815"/>
+           <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="1173.355"/>
+           <SimplePredicate field="total_rec_int" operator="lessThan" value="208.59"/>
+           <SimplePredicate field="last_pymnt_amnt" operator="lessThan" value="0.005"/>
+           <SimpleSetPredicate field="application_type" booleanOperator="isIn">
+            <Array n="1" type="string">&quot;Joint App&quot;</Array>
+           </SimpleSetPredicate>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="2163" confidence="0.998614958448753"/>
+          <ScoreDistribution value="TRUE" recordCount="3" confidence="0.00138504155124654"/>
+         </Node>
+         <Node id="195" score="TRUE" recordCount="8765" defaultChild="390">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="999.995"/>
+           <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="1173.3532692815"/>
+           <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="1173.355"/>
+           <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="208.59"/>
+           <SimplePredicate field="last_pymnt_amnt" operator="greaterOrEqual" value="0.005"/>
+           <SimpleSetPredicate field="application_type" booleanOperator="isIn">
+            <Array n="1" type="string">&quot;Individual&quot;</Array>
+           </SimpleSetPredicate>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="2423" confidence="0.276440387906446"/>
+          <ScoreDistribution value="TRUE" recordCount="6342" confidence="0.723559612093554"/>
+          <Node id="390" score="TRUE" recordCount="4963" defaultChild="781">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="total_rec_prncp" operator="lessThan" value="2997.655"/>
+            <SimplePredicate field="total_pymnt" operator="lessThan" value="3434.303215038"/>
+            <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="3433.635"/>
+            <SimplePredicate field="funded_amnt" operator="lessThan" value="2987.5"/>
+            <SimplePredicate field="loan_amnt" operator="lessThan" value="2987.5"/>
+            <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="2987.5"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="2115" confidence="0.426153536167641"/>
+           <ScoreDistribution value="TRUE" recordCount="2848" confidence="0.573846463832359"/>
+           <Node id="780" score="FALSE" recordCount="1660">
+            <CompoundPredicate booleanOperator="surrogate">
+             <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="2987.5"/>
+             <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="2987.5"/>
+             <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="2987.5"/>
+             <SimplePredicate field="installment" operator="greaterOrEqual" value="97.495"/>
+             <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="678.24"/>
+             <SimplePredicate field="last_fico_range_high" operator="lessThan" value="501.5"/>
+            </CompoundPredicate>
+            <ScoreDistribution value="FALSE" recordCount="1660" confidence="1"/>
+            <ScoreDistribution value="TRUE" recordCount="0" confidence="0"/>
+           </Node>
+           <Node id="781" score="TRUE" recordCount="3303">
+            <CompoundPredicate booleanOperator="surrogate">
+             <SimplePredicate field="funded_amnt" operator="lessThan" value="2987.5"/>
+             <SimplePredicate field="loan_amnt" operator="lessThan" value="2987.5"/>
+             <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="2987.5"/>
+             <SimplePredicate field="installment" operator="lessThan" value="97.495"/>
+             <SimplePredicate field="total_rec_int" operator="lessThan" value="678.24"/>
+             <SimplePredicate field="last_fico_range_high" operator="greaterOrEqual" value="501.5"/>
+            </CompoundPredicate>
+            <ScoreDistribution value="FALSE" recordCount="455" confidence="0.137753557372086"/>
+            <ScoreDistribution value="TRUE" recordCount="2848" confidence="0.862246442627914"/>
+           </Node>
+          </Node>
+          <Node id="391" score="TRUE" recordCount="3802">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="2997.655"/>
+            <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="3434.303215038"/>
+            <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="3433.635"/>
+            <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="2987.5"/>
+            <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="2987.5"/>
+            <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="2987.5"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="308" confidence="0.0810099947396107"/>
+           <ScoreDistribution value="TRUE" recordCount="3494" confidence="0.918990005260389"/>
+          </Node>
+         </Node>
+        </Node>
+       </Node>
+       <Node id="49" score="TRUE" recordCount="37981" defaultChild="98">
+        <CompoundPredicate booleanOperator="surrogate">
+         <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="4999.975"/>
+         <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="6658.57006544595"/>
+         <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="6658.57"/>
+         <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="1411.855"/>
+         <SimplePredicate field="installment" operator="greaterOrEqual" value="312.8"/>
+         <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="5137.5"/>
+        </CompoundPredicate>
+        <ScoreDistribution value="FALSE" recordCount="17691" confidence="0.465785524341118"/>
+        <ScoreDistribution value="TRUE" recordCount="20290" confidence="0.534214475658882"/>
+        <Node id="98" score="FALSE" recordCount="22019" defaultChild="197">
+         <CompoundPredicate booleanOperator="surrogate">
+          <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="11998.22"/>
+          <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="11987.5"/>
+          <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="11987.5"/>
+          <SimplePredicate field="installment" operator="greaterOrEqual" value="371.955"/>
+          <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="2413.295"/>
+          <SimplePredicate field="last_pymnt_amnt" operator="greaterOrEqual" value="374.575"/>
+         </CompoundPredicate>
+         <ScoreDistribution value="FALSE" recordCount="14534" confidence="0.66006630637177"/>
+         <ScoreDistribution value="TRUE" recordCount="7485" confidence="0.33993369362823"/>
+         <Node id="196" score="FALSE" recordCount="11307">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimplePredicate field="total_rec_prncp" operator="lessThan" value="11999.61"/>
+           <SimplePredicate field="total_pymnt" operator="lessThan" value="15514.025"/>
+           <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="15513.61"/>
+           <SimpleSetPredicate field="term" booleanOperator="isIn">
+            <Array n="1" type="string">&quot;60 months&quot;</Array>
+           </SimpleSetPredicate>
+           <SimplePredicate field="last_fico_range_high" operator="lessThan" value="551.5"/>
+           <SimplePredicate field="last_fico_range_low" operator="lessThan" value="547.5"/>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="11307" confidence="1"/>
+          <ScoreDistribution value="TRUE" recordCount="0" confidence="0"/>
+         </Node>
+         <Node id="197" score="TRUE" recordCount="10712" defaultChild="394">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="11999.61"/>
+           <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="15514.025"/>
+           <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="15513.61"/>
+           <SimpleSetPredicate field="term" booleanOperator="isIn">
+            <Array n="1" type="string">&quot;36 months&quot;</Array>
+           </SimpleSetPredicate>
+           <SimplePredicate field="last_fico_range_high" operator="greaterOrEqual" value="551.5"/>
+           <SimplePredicate field="last_fico_range_low" operator="greaterOrEqual" value="547.5"/>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="3227" confidence="0.301250933532487"/>
+          <ScoreDistribution value="TRUE" recordCount="7485" confidence="0.698749066467513"/>
+          <Node id="394" score="FALSE" recordCount="3643" defaultChild="789">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="22762.5"/>
+            <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="22762.5"/>
+            <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="22762.5"/>
+            <SimplePredicate field="installment" operator="greaterOrEqual" value="734.325"/>
+            <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="26254.035"/>
+            <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="26253.7600000002"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="2060" confidence="0.565468020861927"/>
+           <ScoreDistribution value="TRUE" recordCount="1583" confidence="0.434531979138073"/>
+           <Node id="788" score="FALSE" recordCount="1801">
+            <CompoundPredicate booleanOperator="surrogate">
+             <SimplePredicate field="total_rec_prncp" operator="lessThan" value="22758.17"/>
+             <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="27837.98"/>
+             <SimplePredicate field="total_pymnt" operator="lessThan" value="27837.9811668985"/>
+             <SimpleSetPredicate field="term" booleanOperator="isIn">
+              <Array n="1" type="string">&quot;60 months&quot;</Array>
+             </SimpleSetPredicate>
+             <SimplePredicate field="last_fico_range_high" operator="lessThan" value="556.5"/>
+             <SimplePredicate field="last_fico_range_low" operator="lessThan" value="552.5"/>
+            </CompoundPredicate>
+            <ScoreDistribution value="FALSE" recordCount="1801" confidence="1"/>
+            <ScoreDistribution value="TRUE" recordCount="0" confidence="0"/>
+           </Node>
+           <Node id="789" score="TRUE" recordCount="1842">
+            <CompoundPredicate booleanOperator="surrogate">
+             <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="22758.17"/>
+             <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="27837.98"/>
+             <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="27837.9811668985"/>
+             <SimpleSetPredicate field="term" booleanOperator="isIn">
+              <Array n="1" type="string">&quot;36 months&quot;</Array>
+             </SimpleSetPredicate>
+             <SimplePredicate field="last_fico_range_high" operator="greaterOrEqual" value="556.5"/>
+             <SimplePredicate field="last_fico_range_low" operator="greaterOrEqual" value="552.5"/>
+            </CompoundPredicate>
+            <ScoreDistribution value="FALSE" recordCount="259" confidence="0.140608034744843"/>
+            <ScoreDistribution value="TRUE" recordCount="1583" confidence="0.859391965255157"/>
+           </Node>
+          </Node>
+          <Node id="395" score="TRUE" recordCount="7069" defaultChild="790">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="22762.5"/>
+            <SimplePredicate field="funded_amnt" operator="lessThan" value="22762.5"/>
+            <SimplePredicate field="loan_amnt" operator="lessThan" value="22762.5"/>
+            <SimplePredicate field="installment" operator="lessThan" value="734.325"/>
+            <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="26254.035"/>
+            <SimplePredicate field="total_pymnt" operator="lessThan" value="26253.7600000002"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="1167" confidence="0.165086999575612"/>
+           <ScoreDistribution value="TRUE" recordCount="5902" confidence="0.834913000424388"/>
+           <Node id="790" score="TRUE" recordCount="3551" defaultChild="1581">
+            <CompoundPredicate booleanOperator="surrogate">
+             <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="15937.5"/>
+             <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="15937.5"/>
+             <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="15887.5"/>
+             <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="15937.5"/>
+             <SimplePredicate field="installment" operator="greaterOrEqual" value="529.74"/>
+             <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="19105.2516680569"/>
+            </CompoundPredicate>
+            <ScoreDistribution value="FALSE" recordCount="952" confidence="0.2680934947902"/>
+            <ScoreDistribution value="TRUE" recordCount="2599" confidence="0.7319065052098"/>
+            <Node id="1580" score="FALSE" recordCount="726">
+             <CompoundPredicate booleanOperator="surrogate">
+              <SimplePredicate field="total_rec_prncp" operator="lessThan" value="15921.38"/>
+              <SimplePredicate field="total_pymnt" operator="lessThan" value="18343.0955501966"/>
+              <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="18343.805"/>
+              <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+               <Array n="1" type="string">&quot;Y&quot;</Array>
+              </SimpleSetPredicate>
+              <SimplePredicate field="total_acc" operator="greaterOrEqual" value="65.5"/>
+              <SimplePredicate field="int_rate" operator="lessThan" value="6.015"/>
+             </CompoundPredicate>
+             <ScoreDistribution value="FALSE" recordCount="726" confidence="1"/>
+             <ScoreDistribution value="TRUE" recordCount="0" confidence="0"/>
+            </Node>
+            <Node id="1581" score="TRUE" recordCount="2825">
+             <CompoundPredicate booleanOperator="surrogate">
+              <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="15921.38"/>
+              <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="18343.0955501966"/>
+              <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="18343.805"/>
+              <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+               <Array n="1" type="string">&quot;N&quot;</Array>
+              </SimpleSetPredicate>
+              <SimplePredicate field="total_acc" operator="lessThan" value="65.5"/>
+              <SimplePredicate field="int_rate" operator="greaterOrEqual" value="6.015"/>
+             </CompoundPredicate>
+             <ScoreDistribution value="FALSE" recordCount="226" confidence="0.08"/>
+             <ScoreDistribution value="TRUE" recordCount="2599" confidence="0.92"/>
+            </Node>
+           </Node>
+           <Node id="791" score="TRUE" recordCount="3518">
+            <CompoundPredicate booleanOperator="surrogate">
+             <SimplePredicate field="funded_amnt" operator="lessThan" value="15937.5"/>
+             <SimplePredicate field="loan_amnt" operator="lessThan" value="15937.5"/>
+             <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="15887.5"/>
+             <SimplePredicate field="total_rec_prncp" operator="lessThan" value="15937.5"/>
+             <SimplePredicate field="installment" operator="lessThan" value="529.74"/>
+             <SimplePredicate field="total_pymnt" operator="lessThan" value="19105.2516680569"/>
+            </CompoundPredicate>
+            <ScoreDistribution value="FALSE" recordCount="215" confidence="0.0611142694712905"/>
+            <ScoreDistribution value="TRUE" recordCount="3303" confidence="0.938885730528709"/>
+           </Node>
+          </Node>
+         </Node>
+        </Node>
+        <Node id="99" score="TRUE" recordCount="15962" defaultChild="198">
+         <CompoundPredicate booleanOperator="surrogate">
+          <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="11998.22"/>
+          <SimplePredicate field="funded_amnt" operator="lessThan" value="11987.5"/>
+          <SimplePredicate field="loan_amnt" operator="lessThan" value="11987.5"/>
+          <SimplePredicate field="installment" operator="lessThan" value="371.955"/>
+          <SimplePredicate field="total_rec_int" operator="lessThan" value="2413.295"/>
+          <SimplePredicate field="last_pymnt_amnt" operator="lessThan" value="374.575"/>
+         </CompoundPredicate>
+         <ScoreDistribution value="FALSE" recordCount="3157" confidence="0.197782232802907"/>
+         <ScoreDistribution value="TRUE" recordCount="12805" confidence="0.802217767197093"/>
+         <Node id="198" score="TRUE" recordCount="9008" defaultChild="397">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimplePredicate field="total_rec_prncp" operator="lessThan" value="7999.995"/>
+           <SimplePredicate field="total_pymnt" operator="lessThan" value="9468.91653113125"/>
+           <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="9412.395"/>
+           <SimplePredicate field="funded_amnt" operator="lessThan" value="7987.5"/>
+           <SimplePredicate field="loan_amnt" operator="lessThan" value="7987.5"/>
+           <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="7926.25192504674"/>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="2672" confidence="0.296625222024867"/>
+          <ScoreDistribution value="TRUE" recordCount="6336" confidence="0.703374777975133"/>
+          <Node id="396" score="FALSE" recordCount="2170">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="7987.5"/>
+            <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="7987.5"/>
+            <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="7987.5"/>
+            <SimplePredicate field="installment" operator="greaterOrEqual" value="273.26"/>
+            <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="2510.385"/>
+            <SimpleSetPredicate field="term" booleanOperator="isIn">
+             <Array n="1" type="string">&quot;60 months&quot;</Array>
+            </SimpleSetPredicate>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="2166" confidence="0.99815668202765"/>
+           <ScoreDistribution value="TRUE" recordCount="4" confidence="0.00184331797235023"/>
+          </Node>
+          <Node id="397" score="TRUE" recordCount="6838">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="funded_amnt" operator="lessThan" value="7987.5"/>
+            <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="7987.5"/>
+            <SimplePredicate field="loan_amnt" operator="lessThan" value="7987.5"/>
+            <SimplePredicate field="installment" operator="lessThan" value="273.26"/>
+            <SimplePredicate field="total_rec_int" operator="lessThan" value="2510.385"/>
+            <SimpleSetPredicate field="term" booleanOperator="isIn">
+             <Array n="1" type="string">&quot;36 months&quot;</Array>
+            </SimpleSetPredicate>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="506" confidence="0.0739982451009067"/>
+           <ScoreDistribution value="TRUE" recordCount="6332" confidence="0.926001754899093"/>
+          </Node>
+         </Node>
+         <Node id="199" score="TRUE" recordCount="6954">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="7999.995"/>
+           <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="9468.91653113125"/>
+           <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="9412.395"/>
+           <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="7987.5"/>
+           <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="7987.5"/>
+           <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="7926.25192504674"/>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="485" confidence="0.0697440322116767"/>
+          <ScoreDistribution value="TRUE" recordCount="6469" confidence="0.930255967788323"/>
+         </Node>
+        </Node>
+       </Node>
+      </Node>
+      <Node id="25" score="TRUE" recordCount="36228" defaultChild="50">
+       <CompoundPredicate booleanOperator="surrogate">
+        <SimplePredicate field="out_prncp" operator="greaterOrEqual" value="0.015"/>
+        <SimplePredicate field="out_prncp_inv" operator="greaterOrEqual" value="0.015"/>
+        <SimpleSetPredicate field="application_type" booleanOperator="isIn">
+         <Array n="1" type="string">&quot;Joint App&quot;</Array>
+        </SimpleSetPredicate>
+        <SimpleSetPredicate field="hardship_flag" booleanOperator="isIn">
+         <Array n="1" type="string">&quot;Y&quot;</Array>
+        </SimpleSetPredicate>
+        <SimpleSetPredicate field="pymnt_plan" booleanOperator="isIn">
+         <Array n="1" type="string">&quot;y&quot;</Array>
+        </SimpleSetPredicate>
+        <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="14413.72"/>
+       </CompoundPredicate>
+       <ScoreDistribution value="FALSE" recordCount="11403" confidence="0.314756541901292"/>
+       <ScoreDistribution value="TRUE" recordCount="24825" confidence="0.685243458098708"/>
+       <Node id="50" score="TRUE" recordCount="12471" defaultChild="101">
+        <CompoundPredicate booleanOperator="surrogate">
+         <SimplePredicate field="out_prncp_inv" operator="greaterOrEqual" value="7967.385"/>
+         <SimplePredicate field="out_prncp" operator="greaterOrEqual" value="7967.385"/>
+         <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="14962.5"/>
+         <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="14987.5"/>
+         <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="14987.5"/>
+         <SimplePredicate field="installment" operator="greaterOrEqual" value="413.005"/>
+        </CompoundPredicate>
+        <ScoreDistribution value="FALSE" recordCount="5551" confidence="0.445112661374389"/>
+        <ScoreDistribution value="TRUE" recordCount="6920" confidence="0.554887338625611"/>
+        <Node id="100" score="FALSE" recordCount="4065">
+         <CompoundPredicate booleanOperator="surrogate">
+          <SimplePredicate field="last_fico_range_high" operator="lessThan" value="556.5"/>
+          <SimplePredicate field="last_fico_range_low" operator="lessThan" value="552.5"/>
+          <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+           <Array n="1" type="string">&quot;Y&quot;</Array>
+          </SimpleSetPredicate>
+          <SimplePredicate field="total_rec_prncp" operator="lessThan" value="460.155"/>
+          <SimplePredicate field="total_rec_int" operator="lessThan" value="169.6"/>
+          <SimplePredicate field="total_pymnt" operator="lessThan" value="478.635"/>
+         </CompoundPredicate>
+         <ScoreDistribution value="FALSE" recordCount="2438" confidence="0.599753997539975"/>
+         <ScoreDistribution value="TRUE" recordCount="1627" confidence="0.400246002460025"/>
+        </Node>
+        <Node id="101" score="TRUE" recordCount="8406">
+         <CompoundPredicate booleanOperator="surrogate">
+          <SimplePredicate field="last_fico_range_high" operator="greaterOrEqual" value="556.5"/>
+          <SimplePredicate field="last_fico_range_low" operator="greaterOrEqual" value="552.5"/>
+          <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+           <Array n="1" type="string">&quot;N&quot;</Array>
+          </SimpleSetPredicate>
+          <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="460.155"/>
+          <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="169.6"/>
+          <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="478.635"/>
+         </CompoundPredicate>
+         <ScoreDistribution value="FALSE" recordCount="3113" confidence="0.370330716155127"/>
+         <ScoreDistribution value="TRUE" recordCount="5293" confidence="0.629669283844873"/>
+        </Node>
+       </Node>
+       <Node id="51" score="TRUE" recordCount="23757" defaultChild="103">
+        <CompoundPredicate booleanOperator="surrogate">
+         <SimplePredicate field="out_prncp_inv" operator="lessThan" value="7967.385"/>
+         <SimplePredicate field="out_prncp" operator="lessThan" value="7967.385"/>
+         <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="14962.5"/>
+         <SimplePredicate field="loan_amnt" operator="lessThan" value="14987.5"/>
+         <SimplePredicate field="funded_amnt" operator="lessThan" value="14987.5"/>
+         <SimplePredicate field="installment" operator="lessThan" value="413.005"/>
+        </CompoundPredicate>
+        <ScoreDistribution value="FALSE" recordCount="5852" confidence="0.246327398240519"/>
+        <ScoreDistribution value="TRUE" recordCount="17905" confidence="0.753672601759481"/>
+        <Node id="102" score="FALSE" recordCount="448">
+         <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+          <Array n="1" type="string">&quot;Y&quot;</Array>
+         </SimpleSetPredicate>
+         <ScoreDistribution value="FALSE" recordCount="434" confidence="0.96875"/>
+         <ScoreDistribution value="TRUE" recordCount="14" confidence="0.03125"/>
+        </Node>
+        <Node id="103" score="TRUE" recordCount="23309">
+         <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+          <Array n="1" type="string">&quot;N&quot;</Array>
+         </SimpleSetPredicate>
+         <ScoreDistribution value="FALSE" recordCount="5418" confidence="0.232442404221545"/>
+         <ScoreDistribution value="TRUE" recordCount="17891" confidence="0.767557595778455"/>
+        </Node>
+       </Node>
+      </Node>
+     </Node>
+     <Node id="13" score="TRUE" recordCount="34568">
+      <CompoundPredicate booleanOperator="surrogate">
+       <SimplePredicate field="last_pymnt_amnt" operator="greaterOrEqual" value="1424.64"/>
+       <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="14999.995"/>
+       <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="34653.7611912963"/>
+       <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="32531.435"/>
+       <SimplePredicate field="installment" operator="greaterOrEqual" value="1425.245"/>
+       <SimplePredicate field="total_rec_int" operator="lessThan" value="74.06"/>
+      </CompoundPredicate>
+      <ScoreDistribution value="FALSE" recordCount="641" confidence="0.0185431613052534"/>
+      <ScoreDistribution value="TRUE" recordCount="33927" confidence="0.981456838694747"/>
+     </Node>
+    </Node>
+    <Node id="7" score="TRUE" recordCount="1613238" defaultChild="14">
+     <CompoundPredicate booleanOperator="surrogate">
+      <SimplePredicate field="last_fico_range_high" operator="greaterOrEqual" value="601.5"/>
+      <SimplePredicate field="last_fico_range_low" operator="greaterOrEqual" value="597.5"/>
+      <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+       <Array n="1" type="string">&quot;N&quot;</Array>
+      </SimpleSetPredicate>
+      <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="33.35"/>
+      <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="50.43"/>
+      <SimplePredicate field="out_prncp" operator="lessThan" value="39568.42"/>
+     </CompoundPredicate>
+     <ScoreDistribution value="FALSE" recordCount="36791" confidence="0.0228056864517201"/>
+     <ScoreDistribution value="TRUE" recordCount="1576447" confidence="0.97719431354828"/>
+     <Node id="14" score="TRUE" recordCount="112081" defaultChild="28">
+      <CompoundPredicate booleanOperator="surrogate">
+       <SimplePredicate field="last_fico_range_high" operator="lessThan" value="641.5"/>
+       <SimplePredicate field="last_fico_range_low" operator="lessThan" value="637.5"/>
+       <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+        <Array n="1" type="string">&quot;Y&quot;</Array>
+       </SimpleSetPredicate>
+       <SimplePredicate field="total_rec_late_fee" operator="lessThan" value="-2.3e-09"/>
+      </CompoundPredicate>
+      <ScoreDistribution value="FALSE" recordCount="15687" confidence="0.1399612780043"/>
+      <ScoreDistribution value="TRUE" recordCount="96394" confidence="0.8600387219957"/>
+      <Node id="28" score="TRUE" recordCount="80953" defaultChild="56">
+       <CompoundPredicate booleanOperator="surrogate">
+        <SimplePredicate field="last_pymnt_amnt" operator="lessThan" value="1434.115"/>
+        <SimplePredicate field="total_rec_prncp" operator="lessThan" value="14999.995"/>
+        <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="29471.2"/>
+        <SimplePredicate field="total_pymnt" operator="lessThan" value="29470.693668965"/>
+        <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="111.115"/>
+        <SimplePredicate field="installment" operator="lessThan" value="1436.03"/>
+       </CompoundPredicate>
+       <ScoreDistribution value="FALSE" recordCount="15426" confidence="0.190555013402839"/>
+       <ScoreDistribution value="TRUE" recordCount="65527" confidence="0.809444986597161"/>
+       <Node id="56" score="TRUE" recordCount="34601" defaultChild="112">
+        <CompoundPredicate booleanOperator="surrogate">
+         <SimplePredicate field="out_prncp" operator="lessThan" value="0.03"/>
+         <SimplePredicate field="out_prncp_inv" operator="lessThan" value="0.03"/>
+         <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="9999.925"/>
+         <SimplePredicate field="last_pymnt_amnt" operator="lessThan" value="64.9"/>
+         <SimplePredicate field="int_rate" operator="lessThan" value="9.38"/>
+         <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="2998.6892021255"/>
+        </CompoundPredicate>
+        <ScoreDistribution value="FALSE" recordCount="9898" confidence="0.286061096500101"/>
+        <ScoreDistribution value="TRUE" recordCount="24703" confidence="0.713938903499899"/>
+        <Node id="112" score="FALSE" recordCount="11935" defaultChild="225">
+         <CompoundPredicate booleanOperator="surrogate">
+          <SimplePredicate field="total_rec_prncp" operator="lessThan" value="4799.995"/>
+          <SimplePredicate field="total_pymnt" operator="lessThan" value="5626.55576942265"/>
+          <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="5626.555"/>
+          <SimplePredicate field="funded_amnt" operator="lessThan" value="4787.5"/>
+          <SimplePredicate field="loan_amnt" operator="lessThan" value="4787.5"/>
+          <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="4776.42257077594"/>
+         </CompoundPredicate>
+         <ScoreDistribution value="FALSE" recordCount="6901" confidence="0.578215333054043"/>
+         <ScoreDistribution value="TRUE" recordCount="5034" confidence="0.421784666945957"/>
+         <Node id="224" score="FALSE" recordCount="6270">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="4787.5"/>
+           <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="4787.5"/>
+           <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="4787.5"/>
+           <SimplePredicate field="installment" operator="greaterOrEqual" value="162.255"/>
+           <SimplePredicate field="last_pymnt_amnt" operator="greaterOrEqual" value="167.235"/>
+           <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="997.425"/>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="6269" confidence="0.999840510366826"/>
+          <ScoreDistribution value="TRUE" recordCount="1" confidence="0.000159489633173844"/>
+         </Node>
+         <Node id="225" score="TRUE" recordCount="5665" defaultChild="451">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimplePredicate field="funded_amnt" operator="lessThan" value="4787.5"/>
+           <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="4787.5"/>
+           <SimplePredicate field="loan_amnt" operator="lessThan" value="4787.5"/>
+           <SimplePredicate field="installment" operator="lessThan" value="162.255"/>
+           <SimplePredicate field="last_pymnt_amnt" operator="lessThan" value="167.235"/>
+           <SimplePredicate field="total_rec_int" operator="lessThan" value="997.425"/>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="632" confidence="0.111562224183583"/>
+          <ScoreDistribution value="TRUE" recordCount="5033" confidence="0.888437775816417"/>
+          <Node id="450" score="FALSE" recordCount="343">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="total_rec_prncp" operator="lessThan" value="999.295"/>
+            <SimplePredicate field="total_pymnt" operator="lessThan" value="998.115"/>
+            <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="998.115"/>
+            <SimplePredicate field="total_rec_int" operator="lessThan" value="0.28"/>
+            <SimpleSetPredicate field="application_type" booleanOperator="isIn">
+             <Array n="1" type="string">&quot;Joint App&quot;</Array>
+            </SimpleSetPredicate>
+            <SimplePredicate field="last_pymnt_amnt" operator="lessThan" value="0.01"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="341" confidence="0.994169096209913"/>
+           <ScoreDistribution value="TRUE" recordCount="2" confidence="0.00583090379008746"/>
+          </Node>
+          <Node id="451" score="TRUE" recordCount="5322">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="999.295"/>
+            <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="998.115"/>
+            <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="998.115"/>
+            <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="0.28"/>
+            <SimpleSetPredicate field="application_type" booleanOperator="isIn">
+             <Array n="1" type="string">&quot;Individual&quot;</Array>
+            </SimpleSetPredicate>
+            <SimplePredicate field="last_pymnt_amnt" operator="greaterOrEqual" value="0.01"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="291" confidence="0.0546786922209696"/>
+           <ScoreDistribution value="TRUE" recordCount="5031" confidence="0.94532130777903"/>
+          </Node>
+         </Node>
+        </Node>
+        <Node id="113" score="TRUE" recordCount="22666" defaultChild="226">
+         <CompoundPredicate booleanOperator="surrogate">
+          <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="4799.995"/>
+          <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="5626.55576942265"/>
+          <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="5626.555"/>
+          <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="4787.5"/>
+          <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="4787.5"/>
+          <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="4776.42257077594"/>
+         </CompoundPredicate>
+         <ScoreDistribution value="FALSE" recordCount="2997" confidence="0.132224477190506"/>
+         <ScoreDistribution value="TRUE" recordCount="19669" confidence="0.867775522809494"/>
+         <Node id="226" score="TRUE" recordCount="2967" defaultChild="453">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimpleSetPredicate field="term" booleanOperator="isIn">
+            <Array n="1" type="string">&quot;60 months&quot;</Array>
+           </SimpleSetPredicate>
+           <SimplePredicate field="total_rec_int" operator="greaterOrEqual" value="7061.37"/>
+           <SimplePredicate field="int_rate" operator="greaterOrEqual" value="20.875"/>
+           <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="46374.8792271788"/>
+           <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="46219.7"/>
+           <SimplePredicate field="installment" operator="lessThan" value="146.28"/>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="1258" confidence="0.423997303673744"/>
+          <ScoreDistribution value="TRUE" recordCount="1709" confidence="0.576002696326255"/>
+          <Node id="452" score="FALSE" recordCount="1010">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="total_rec_prncp" operator="lessThan" value="9997.515"/>
+            <SimplePredicate field="total_pymnt" operator="lessThan" value="15506.0455918887"/>
+            <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="15643.48"/>
+            <SimplePredicate field="funded_amnt" operator="lessThan" value="9875"/>
+            <SimplePredicate field="loan_amnt" operator="lessThan" value="9875"/>
+            <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="9672.79825020399"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="904" confidence="0.895049504950495"/>
+           <ScoreDistribution value="TRUE" recordCount="106" confidence="0.104950495049505"/>
+          </Node>
+          <Node id="453" score="TRUE" recordCount="1957">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="9997.515"/>
+            <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="15506.0455918887"/>
+            <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="15643.48"/>
+            <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="9875"/>
+            <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="9875"/>
+            <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="9672.79825020399"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="354" confidence="0.180889115993868"/>
+           <ScoreDistribution value="TRUE" recordCount="1603" confidence="0.819110884006132"/>
+          </Node>
+         </Node>
+         <Node id="227" score="TRUE" recordCount="19699" defaultChild="454">
+          <CompoundPredicate booleanOperator="surrogate">
+           <SimpleSetPredicate field="term" booleanOperator="isIn">
+            <Array n="1" type="string">&quot;36 months&quot;</Array>
+           </SimpleSetPredicate>
+           <SimplePredicate field="total_rec_int" operator="lessThan" value="7061.37"/>
+           <SimplePredicate field="int_rate" operator="lessThan" value="20.875"/>
+           <SimplePredicate field="total_pymnt" operator="lessThan" value="46374.8792271788"/>
+           <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="46219.7"/>
+           <SimplePredicate field="installment" operator="greaterOrEqual" value="146.28"/>
+          </CompoundPredicate>
+          <ScoreDistribution value="FALSE" recordCount="1739" confidence="0.0882785928219706"/>
+          <ScoreDistribution value="TRUE" recordCount="17960" confidence="0.911721407178029"/>
+          <Node id="454" score="TRUE" recordCount="4192" defaultChild="909">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="installment" operator="greaterOrEqual" value="562.3"/>
+            <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="16262.5"/>
+            <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="16262.5"/>
+            <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="16262.5"/>
+            <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="20205.6921553088"/>
+            <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="20205.02"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="902" confidence="0.215171755725191"/>
+           <ScoreDistribution value="TRUE" recordCount="3290" confidence="0.784828244274809"/>
+           <Node id="908" score="FALSE" recordCount="772">
+            <CompoundPredicate booleanOperator="surrogate">
+             <SimplePredicate field="total_rec_prncp" operator="lessThan" value="15870.65"/>
+             <SimplePredicate field="total_pymnt" operator="lessThan" value="19015.37"/>
+             <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="19015.37"/>
+             <SimplePredicate field="loan_amnt" operator="lessThan" value="15862.5"/>
+             <SimplePredicate field="funded_amnt" operator="lessThan" value="15862.5"/>
+             <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+              <Array n="1" type="string">&quot;Y&quot;</Array>
+             </SimpleSetPredicate>
+            </CompoundPredicate>
+            <ScoreDistribution value="FALSE" recordCount="751" confidence="0.97279792746114"/>
+            <ScoreDistribution value="TRUE" recordCount="21" confidence="0.0272020725388601"/>
+           </Node>
+           <Node id="909" score="TRUE" recordCount="3420">
+            <CompoundPredicate booleanOperator="surrogate">
+             <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="15870.65"/>
+             <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="19015.37"/>
+             <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="19015.37"/>
+             <SimplePredicate field="loan_amnt" operator="greaterOrEqual" value="15862.5"/>
+             <SimplePredicate field="funded_amnt" operator="greaterOrEqual" value="15862.5"/>
+             <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+              <Array n="1" type="string">&quot;N&quot;</Array>
+             </SimpleSetPredicate>
+            </CompoundPredicate>
+            <ScoreDistribution value="FALSE" recordCount="151" confidence="0.0441520467836257"/>
+            <ScoreDistribution value="TRUE" recordCount="3269" confidence="0.955847953216374"/>
+           </Node>
+          </Node>
+          <Node id="455" score="TRUE" recordCount="15507">
+           <CompoundPredicate booleanOperator="surrogate">
+            <SimplePredicate field="installment" operator="lessThan" value="562.3"/>
+            <SimplePredicate field="funded_amnt" operator="lessThan" value="16262.5"/>
+            <SimplePredicate field="loan_amnt" operator="lessThan" value="16262.5"/>
+            <SimplePredicate field="funded_amnt_inv" operator="lessThan" value="16262.5"/>
+            <SimplePredicate field="total_pymnt" operator="lessThan" value="20205.6921553088"/>
+            <SimplePredicate field="total_pymnt_inv" operator="lessThan" value="20205.02"/>
+           </CompoundPredicate>
+           <ScoreDistribution value="FALSE" recordCount="837" confidence="0.0539756239117818"/>
+           <ScoreDistribution value="TRUE" recordCount="14670" confidence="0.946024376088218"/>
+          </Node>
+         </Node>
+        </Node>
+       </Node>
+       <Node id="57" score="TRUE" recordCount="46352">
+        <CompoundPredicate booleanOperator="surrogate">
+         <SimplePredicate field="out_prncp" operator="greaterOrEqual" value="0.03"/>
+         <SimplePredicate field="out_prncp_inv" operator="greaterOrEqual" value="0.03"/>
+         <SimplePredicate field="total_rec_prncp" operator="lessThan" value="9999.925"/>
+         <SimplePredicate field="last_pymnt_amnt" operator="greaterOrEqual" value="64.9"/>
+         <SimplePredicate field="int_rate" operator="greaterOrEqual" value="9.38"/>
+         <SimplePredicate field="funded_amnt_inv" operator="greaterOrEqual" value="2998.6892021255"/>
+        </CompoundPredicate>
+        <ScoreDistribution value="FALSE" recordCount="5528" confidence="0.119261304798067"/>
+        <ScoreDistribution value="TRUE" recordCount="40824" confidence="0.880738695201933"/>
+       </Node>
+      </Node>
+      <Node id="29" score="TRUE" recordCount="31128">
+       <CompoundPredicate booleanOperator="surrogate">
+        <SimplePredicate field="last_pymnt_amnt" operator="greaterOrEqual" value="1434.115"/>
+        <SimplePredicate field="total_rec_prncp" operator="greaterOrEqual" value="14999.995"/>
+        <SimplePredicate field="total_pymnt_inv" operator="greaterOrEqual" value="29471.2"/>
+        <SimplePredicate field="total_pymnt" operator="greaterOrEqual" value="29470.693668965"/>
+        <SimplePredicate field="total_rec_int" operator="lessThan" value="111.115"/>
+        <SimplePredicate field="installment" operator="greaterOrEqual" value="1436.03"/>
+       </CompoundPredicate>
+       <ScoreDistribution value="FALSE" recordCount="261" confidence="0.00838473400154202"/>
+       <ScoreDistribution value="TRUE" recordCount="30867" confidence="0.991615265998458"/>
+      </Node>
+     </Node>
+     <Node id="15" score="TRUE" recordCount="1501157">
+      <CompoundPredicate booleanOperator="surrogate">
+       <SimplePredicate field="last_fico_range_high" operator="greaterOrEqual" value="641.5"/>
+       <SimplePredicate field="last_fico_range_low" operator="greaterOrEqual" value="637.5"/>
+       <SimpleSetPredicate field="debt_settlement_flag" booleanOperator="isIn">
+        <Array n="1" type="string">&quot;N&quot;</Array>
+       </SimpleSetPredicate>
+       <SimplePredicate field="total_rec_late_fee" operator="greaterOrEqual" value="-2.3e-09"/>
+      </CompoundPredicate>
+      <ScoreDistribution value="FALSE" recordCount="21104" confidence="0.0140584895517258"/>
+      <ScoreDistribution value="TRUE" recordCount="1480053" confidence="0.985941510448274"/>
+     </Node>
+    </Node>
+   </Node>
+  </Node>
+ </TreeModel>
+</PMML>

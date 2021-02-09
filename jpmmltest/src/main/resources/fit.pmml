@@ -1,0 +1,1049 @@
+<?xml version="1.0"?>
+<PMML version="4.4.1" xmlns="http://www.dmg.org/PMML-4_4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dmg.org/PMML-4_4 http://www.dmg.org/pmml/v4-4/pmml-4-4.xsd">
+ <Header copyright="Copyright (c) 2021 azrul" description="Extreme Gradient Boosting Model">
+  <Extension name="user" value="azrul" extender="SoftwareAG PMML Generator"/>
+  <Application name="SoftwareAG PMML Generator" version="2.4.0"/>
+  <Timestamp>2021-01-31 18:25:52</Timestamp>
+ </Header>
+ <DataDictionary numberOfFields="1">
+  <DataField name="target" optype="categorical" dataType="string">
+   <Value value="FALSE"/>
+   <Value value="TRUE"/>
+  </DataField>
+ </DataDictionary>
+ <MiningModel modelName="xboost_Model" algorithmName="xgboost" functionName="classification">
+  <MiningSchema>
+   <MiningField name="target" usageType="predicted" invalidValueTreatment="returnInvalid"/>
+  </MiningSchema>
+  <Output>
+   <OutputField name="Predicted_target" optype="categorical" dataType="string" feature="predictedValue"/>
+   <OutputField name="Probability_FALSE" optype="continuous" dataType="double" feature="probability" value="FALSE"/>
+   <OutputField name="Probability_TRUE" optype="continuous" dataType="double" feature="probability" value="TRUE"/>
+  </Output>
+  <Segmentation multipleModelMethod="modelChain">
+   <Segment id="0">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree0" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="1">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree1" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="2">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree2" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="3">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree3" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="4">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree4" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="5">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree5" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="6">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree6" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="7">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree7" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="8">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree8" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="9">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree9" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="10">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree10" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="11">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree11" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="12">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree12" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="13">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree13" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="14">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree14" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="15">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree15" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="16">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree16" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="17">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree17" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="18">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree18" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="19">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree19" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="20">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree20" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="21">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree21" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="22">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree22" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="23">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree23" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="24">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree24" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="25">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree25" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="26">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree26" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="27">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree27" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="28">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree28" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="29">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree29" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="30">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree30" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="31">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree31" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="32">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree32" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="33">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree33" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="34">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree34" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="35">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree35" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="36">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree36" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="37">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree37" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="38">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree38" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="39">
+    <True/>
+    <TreeModel modelName="xboost_Model" functionName="regression" algorithmName="xgboost" splitCharacteristic="multiSplit">
+     <MiningSchema>
+      <MiningField name="target" usageType="predicted" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <Output>
+      <OutputField name="predictedValueTree39" dataType="double" optype="continuous" feature="predictedValue"/>
+     </Output>
+     <Node>
+      <True/>
+      <Node>
+       <SimplePredicate field="target" operator="lessThan" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="greaterOrEqual" value="0.5"/>
+      </Node>
+      <Node>
+       <SimplePredicate field="target" operator="isMissing"/>
+      </Node>
+     </Node>
+    </TreeModel>
+   </Segment>
+   <Segment id="40">
+    <True/>
+    <RegressionModel functionName="classification" normalizationMethod="softmax" modelName="CollectingModel">
+     <MiningSchema>
+      <MiningField name="predictedValueTree0" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree1" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree2" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree3" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree4" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree5" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree6" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree7" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree8" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree9" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree10" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree11" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree12" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree13" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree14" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree15" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree16" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree17" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree18" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree19" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree20" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree21" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree22" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree23" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree24" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree25" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree26" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree27" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree28" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree29" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree30" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree31" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree32" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree33" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree34" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree35" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree36" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree37" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree38" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+      <MiningField name="predictedValueTree39" usageType="active" optype="continuous" invalidValueTreatment="asIs"/>
+     </MiningSchema>
+     <LocalTransformations>
+      <DerivedField name="SumCatFALSE" dataType="double" optype="continuous">
+       <Apply function="sum">
+        <FieldRef field="predictedValueTree0"/>
+        <FieldRef field="predictedValueTree2"/>
+        <FieldRef field="predictedValueTree4"/>
+        <FieldRef field="predictedValueTree6"/>
+        <FieldRef field="predictedValueTree8"/>
+        <FieldRef field="predictedValueTree10"/>
+        <FieldRef field="predictedValueTree12"/>
+        <FieldRef field="predictedValueTree14"/>
+        <FieldRef field="predictedValueTree16"/>
+        <FieldRef field="predictedValueTree18"/>
+        <FieldRef field="predictedValueTree20"/>
+        <FieldRef field="predictedValueTree22"/>
+        <FieldRef field="predictedValueTree24"/>
+        <FieldRef field="predictedValueTree26"/>
+        <FieldRef field="predictedValueTree28"/>
+        <FieldRef field="predictedValueTree30"/>
+        <FieldRef field="predictedValueTree32"/>
+        <FieldRef field="predictedValueTree34"/>
+        <FieldRef field="predictedValueTree36"/>
+        <FieldRef field="predictedValueTree38"/>
+       </Apply>
+      </DerivedField>
+      <DerivedField name="SumCatTRUE" dataType="double" optype="continuous">
+       <Apply function="sum">
+        <FieldRef field="predictedValueTree1"/>
+        <FieldRef field="predictedValueTree3"/>
+        <FieldRef field="predictedValueTree5"/>
+        <FieldRef field="predictedValueTree7"/>
+        <FieldRef field="predictedValueTree9"/>
+        <FieldRef field="predictedValueTree11"/>
+        <FieldRef field="predictedValueTree13"/>
+        <FieldRef field="predictedValueTree15"/>
+        <FieldRef field="predictedValueTree17"/>
+        <FieldRef field="predictedValueTree19"/>
+        <FieldRef field="predictedValueTree21"/>
+        <FieldRef field="predictedValueTree23"/>
+        <FieldRef field="predictedValueTree25"/>
+        <FieldRef field="predictedValueTree27"/>
+        <FieldRef field="predictedValueTree29"/>
+        <FieldRef field="predictedValueTree31"/>
+        <FieldRef field="predictedValueTree33"/>
+        <FieldRef field="predictedValueTree35"/>
+        <FieldRef field="predictedValueTree37"/>
+        <FieldRef field="predictedValueTree39"/>
+       </Apply>
+      </DerivedField>
+     </LocalTransformations>
+     <RegressionTable intercept="0" targetCategory="FALSE">
+      <NumericPredictor name="SumCatFALSE" coefficient="1.0"/>
+     </RegressionTable>
+     <RegressionTable intercept="0" targetCategory="TRUE">
+      <NumericPredictor name="SumCatTRUE" coefficient="1.0"/>
+     </RegressionTable>
+    </RegressionModel>
+   </Segment>
+  </Segmentation>
+ </MiningModel>
+</PMML>
