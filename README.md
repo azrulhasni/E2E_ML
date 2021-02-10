@@ -1510,6 +1510,10 @@ the bells and whistles, do visit our earlier article
 
     \|- scorecard \<— this is the unzipped folder
 
+     
+
+Setting up Docker Hub account
+
  
 
 ### Developing your micro-service
@@ -1518,8 +1522,16 @@ the bells and whistles, do visit our earlier article
     generated in the paragraph Exporting model to PMML file to the folder
     \$E2E_ML/scorecard/src/main/resources
 
--   In the folder \$E2E_ML/scorecard make sure the pom.xml, add the dependencies
-    here and the jib-maven-plugin plugin:
+-   In the folder \$E2E_ML/scorecard make sure the pom.xml
+    (<https://github.com/azrulhasni/E2E_ML/blob/main/scorecard/pom.xml>), add
+    the dependencies here and the jib-maven-plugin plugin. The dependencies are:
+
+    1.  JPMML: to interpret and execute our PMML file
+
+    2.  Decorate: To create our Kubernetes manifest file
+
+    3.  The plugin  jib-maven-plugin: Use to create a docker image and exporting
+        it to Docker Hub
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1529,6 +1541,10 @@ the bells and whistles, do visit our earlier article
     <dependencies>
         ...
        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.jpmml</groupId>
             <artifactId>pmml-evaluator</artifactId>
@@ -1544,7 +1560,6 @@ the bells and whistles, do visit our earlier article
             <artifactId>pmml-model</artifactId>
             <version>1.5.11</version>
         </dependency>
-
         <dependency>
             <groupId>org.jpmml</groupId>
             <artifactId>pmml-model-metro</artifactId>
@@ -1555,7 +1570,6 @@ the bells and whistles, do visit our earlier article
             <artifactId>pmml-model-moxy</artifactId>
             <version>1.5.11</version>
         </dependency>
-
         <dependency>
             <groupId>io.dekorate</groupId>
             <artifactId>kubernetes-spring-starter</artifactId>
@@ -1567,18 +1581,12 @@ the bells and whistles, do visit our earlier article
             <version>1.0.3</version>
             <type>jar</type>
         </dependency>
-        
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.11.3</version>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+    </dependencies>
 
     </dependencies>
 
@@ -1607,8 +1615,11 @@ the bells and whistles, do visit our earlier article
 
 -   In the folder
     \$E2E_ML/scorecard/src/main/resources/scorecard/src/main/java/com/azrul/ml,
-    open up the ScorecardApplication.java
+    open up the ScorecardApplication.java and make sure the name and port is
+    set. This is especially for the Kubernetes manifest we will create
 
 ![](README.images/9dM4ll.jpg)
 
 -   sds
+
+-   ds
