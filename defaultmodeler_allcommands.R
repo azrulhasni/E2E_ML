@@ -195,11 +195,13 @@ saveXML(x,"default_model_normal.pmml")
 x_wl<-pmml(fit_with_loss)  
 saveXML(x_wl,"default_model_lowrisk.pmml")
 
-#Exporting test data to JSON
-#---------------------------
+#Exporting test data to JSON and CSV
+#----------------------------------
 testdata$id <-1:nrow(testdata)#add an id
 sampledtestdata <- testdata[sample(nrow(testdata),20),] #sample some 20 data points
 testjson <- toJSON(sampledtestdata)
 write(testjson, file="input.json")
+write.csv(sampledtestdata, file="input.csv")
+
 
 

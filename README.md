@@ -16,10 +16,10 @@ The art of data science
 
 Data science is one of those fields where you need to master a few disciplines
 to get good at it. From statistics, to machine learning, to data engineering, to
-software development, to business. In order to successfully delivers a data
+software development, to business. In order to successfully deliver a data
 science project, we need a team of not just data scientists, but also software
-developers, data engineers and architects. Just looking at the data and AI
-landscape (2020) below shows how mind-boggling data science is.
+developers, data engineers, business analysts and architects. Just looking at
+the data and AI landscape (2020) below shows how mind-boggling data science is.
 
  
 
@@ -51,9 +51,9 @@ Well, this appeared in my news feed a few days ago:
 
 ![](README.images/Xsxts4.jpg)
 
-Both java developers and data scientists have the best rated job - so, why don’t
+Both Java developers and data scientists have the best rated job - so, why don’t
 we combine those together and created the best of the best rated article -
-talking about data science at the beginning, and continue with java development
+talking about data science at the beginning, and continue with Java development
 towards the end :)
 
  
@@ -235,14 +235,6 @@ and you are good to go
 
  
 
-### Setting up Kubernetes and Docker
-
-We will not go into details of setting up Kubernetes and Docker in this
-tutorial. Please visit my earlier article on this
-<https://github.com/azrulhasni/Ebanking-JHipster-Keycloak-Nginx-K8#install-docker-desktop>
-
- 
-
 How machine learning works
 --------------------------
 
@@ -312,6 +304,19 @@ Data loading and wrangling
     [<https://www.kaggle.com/wordsforthewise/lending-club>] and download the
     accepted_2007_to_2018Q4.csv.gz file and put it in the \$PROJECTS/E2E_ML
     folder.
+
+ 
+
+### Important notes on R
+
+-   Note that some of the algorithms here will take time to complete. If you
+    wish to continue the tutorial while skipping the more time consuming steps,
+    you can use some intermediary data here
+    <https://github.com/azrulhasni/E2E_ML/blob/main/intermediary_data.RData>.
+
+-   If you want to follow the article by running the R commands, all the
+    commands here are collected in one big script
+    <https://github.com/azrulhasni/E2E_ML/blob/main/defaultmodeler_allcommands.R>
 
  
 
@@ -598,7 +603,10 @@ Data loading and wrangling
 > smplddata <- data4boruta[sample(nrow(data4boruta), 60000), ]  #sample 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--   We then train Boruta with the sampled copy of our data.
+-   We then train Boruta with the sampled copy of our data. Note that Boruta
+    will take a while to complete. If you want to skip this step, please use the
+    intermediary data here
+    <https://github.com/azrulhasni/E2E_ML/blob/main/intermediary_data.RData>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > boruta_output <- Boruta(target ~ ., data=smplddata, doTrace=2, maxRuns=20)   
@@ -990,7 +998,10 @@ credit lifecycle.
 
 -   OK, let us run our decision tree algorithm. **So the ML model that we will
     end up with is a tree**. It will take some time to finish. Once done, our
-    decision tree is contained in the variable `fit`
+    decision tree is contained in the variable `fit`. Do note that training a
+    decision tree will take a while. If you want to skip this step, you can get
+    the` fit `variable here
+    <https://github.com/azrulhasni/E2E_ML/blob/main/intermediary_data.RData>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > fit <- rpart(target~., 
@@ -1231,6 +1242,8 @@ Prediction          1          0
 
  
 
+ 
+
 Discussion: Imbalanced classification
 -------------------------------------
 
@@ -1359,7 +1372,7 @@ Exporting our machine learning model
 
  
 
-### Exporting test data to JSON
+### Exporting test data to JSON and CSV
 
 -   When we deploy our machine learning model as API later, we will need to call
     it with a json formatted input (yes, you can also use CSV - but customarily,
@@ -1473,24 +1486,39 @@ Exporting our machine learning model
 ]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- 
+-   Let us also export the input data to CSV for safe keeping
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> write.csv(sampledtestdata, file="input.csv")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  
 
 Model Deployment and Decisioning
 --------------------------------
 
-Let us recall where we are in the credit lifecycle.
+-   Let us recall where we are in the credit lifecycle.
 
 ![](README.images/Fqei4x.jpg)
 
  
 
-Note that the micro-service we will develop and deploy will be very basic -
-there will be no security, no authentication , no registry, no profiles etc. If
-you are interested in learning to develop full fledge micro-services with all
-the bells and whistles, do visit our earlier article
-<https://www.linkedin.com/pulse/getting-started-secure-ssl-protected-micro-services-jhipster-madisa/>
+-   Note that the micro-service we will develop and deploy will be very basic -
+    there will be no security, no authentication , no registry, no profiles etc.
+    If you are interested in learning to develop full fledge micro-services with
+    all the bells and whistles, do visit our earlier article
+    <https://www.linkedin.com/pulse/getting-started-secure-ssl-protected-micro-services-jhipster-madisa/>
+
+-   Since we are using Java, we would expect you to have a working Maven set up.
+    If not, please get Maven installed before we proceed
+    <http://maven.apache.org/install.html>
+
+ 
+
+### Setting up Kubernetes on your own machine for development
+
+-   Follow our earlier tutorial here
+    <https://github.com/azrulhasni/Ebanking-JHipster-Keycloak-Nginx-K8#install-docker-desktop>
 
  
 
@@ -1512,26 +1540,134 @@ the bells and whistles, do visit our earlier article
 
      
 
-Setting up Docker Hub account
+### Setting up Docker Hub account
+
+-   Visit Docker Hub (https://hub.docker.com) and open up an account.
+
+-   A more detailed explanation of how deployment works in real work vs in this
+    article can be found in our earlier tutorial
+    (<https://github.com/azrulhasni/Ebanking-JHipster-Keycloak-Nginx-K8#deployment-concept>).
+    For now, the explanation below should suffice
+
+-   In a real CI/CD set up, source code would be pushed to a source code
+    repository. From there we would build it and submit it to Docker Hub
+    ([https://hub.docker.com](https://hub.docker.com/)). From Docker Hub, we
+    would then deploy the binaries into a Kubernetes cluster.
+
+-   In our tutorial set up, we do not have all the CI/CD components.
+    Nonetheless, we will still push, from our development machine, to Docker
+    Hub, before deploying to our Kubernetes cluster.
+
+![](https://github.com/azrulhasni/Ebanking-JHipster-Keycloak-Nginx-K8/blob/master/README.images/OE1ASU.jpg?raw=true)
 
  
 
-### Developing your micro-service
+### Registering Docker Hub account in your Maven settting
+
+-   Next, we will register Docker Hub to our Maven. This will allow us to use
+    Jib to upload our Docker image to Docker Hub.
+
+-   Locate your Maven’s settings.xml. The location could be:
+
+    -   The Maven install: `${maven.home}/conf/settings.xml`
+
+    -   A user’s install: `${user.home}/.m2/settings.xml`
+
+-   Under the \<servers\> tag, add a server
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ <servers>
+    <server>
+        <id>registry.hub.docker.com</id>
+        <username><Docker Hub Account name></username>
+        <password><Docker Hub password></password>
+    </server>
+...
+<servers>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   Save the file, fire up your command line console and type
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> mvn help:effective-settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   You will then see the output below. Validate if the server you registered is
+    in the settings
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-help-plugin:3.2.0:effective-settings (default-cli) @ standalone-pom ---
+[INFO] 
+Effective user-specific configuration settings:
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!-- Generated by Maven Help Plugin on 2021-02-10T11:50:56+08:00            -->
+<!-- See: http://maven.apache.org/plugins/maven-help-plugin/                -->
+<!--                                                                        -->
+<!-- ====================================================================== -->
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!-- Effective Settings for 'azrul' on 'Azruls-MacBook-Pro.local'           -->
+<!--                                                                        -->
+<!-- ====================================================================== -->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+  <localRepository>/Users/azrul/.m2/repository</localRepository>
+  <servers>
+    <server>
+      <username><Docker Hub username></username>
+      <password>***</password>
+      <id>registry.hub.docker.com</id>
+    </server>
+  </servers>
+  <pluginGroups>
+    <pluginGroup>org.apache.maven.plugins</pluginGroup>
+    <pluginGroup>org.codehaus.mojo</pluginGroup>
+  </pluginGroups>
+</settings>
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 5.987 s
+[INFO] Finished at: 2021-02-10T11:51:01+08:00
+[INFO] Final Memory: 11M/47M
+[INFO] ------------------------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
+
+### Developing our micro-service: copying PMML file to micro-service
+
+-   Let us go back to the scorecard folder we just unzipped before
 
 -   Copy our PMML files (default_model_normal.pmml, default_model_lowrisk.pmml)
     generated in the paragraph Exporting model to PMML file to the folder
     \$E2E_ML/scorecard/src/main/resources
 
--   In the folder \$E2E_ML/scorecard make sure the pom.xml
-    (<https://github.com/azrulhasni/E2E_ML/blob/main/scorecard/pom.xml>), add
-    the dependencies here and the jib-maven-plugin plugin. The dependencies are:
+ 
+
+### Developing our micro-service: specifying dependencies
+
+-   In the folder \$E2E_ML/scorecard make sure the pom.xml, add the dependencies
+    here and the jib-maven-plugin plugin. The dependencies are:
 
     1.  JPMML: to interpret and execute our PMML file
 
     2.  Decorate: To create our Kubernetes manifest file
 
     3.  The plugin  jib-maven-plugin: Use to create a docker image and exporting
-        it to Docker Hub
+        it to Docker Hub. Replace the tag `<your dockerhub username>` below with
+        your own Docker Hub user name.
+
+     
+
+-   Code: <https://github.com/azrulhasni/E2E_ML/blob/main/scorecard/pom.xml>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1599,7 +1735,7 @@ Setting up Docker Hub account
                 <version>2.5.0</version>
                 <configuration>
                     <to>
-                        <image>azrulhasni/scorecard</image>
+                        <image><your dockerhub username>/scorecard</image>
                     </to>
                     <container>
                         <ports>
@@ -1613,13 +1749,525 @@ Setting up Docker Hub account
 </project>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+ 
+
+### Developing our micro-service: initiating micro-service
+
 -   In the folder
     \$E2E_ML/scorecard/src/main/resources/scorecard/src/main/java/com/azrul/ml,
-    open up the ScorecardApplication.java and make sure the name and port is
-    set. This is especially for the Kubernetes manifest we will create
+    open up the file ScorecardApplication.java. It should look like the one
+    below
 
-![](README.images/9dM4ll.jpg)
+-   Code:
+    <https://github.com/azrulhasni/E2E_ML/blob/main/scorecard/src/main/java/com/azrul/ml/scorecard/ScorecardApplication.java>
 
--   sds
+![](README.images/CWieHl.jpg)
 
--   ds
+### Developing our micro-service: configuration
+
+-   Next, open up the application.properties file from the folder
+    \$E2E_ML/scorecard/src/main/resources.
+
+-   The `server.port` property is the port Spring Boot will expose. Make sure it
+    is the same as the port we put in the pom.xml file
+
+-   The `scorecard.pmmlfile` is a custom property that points to the PMML file
+    located in our resources folder
+
+-   Code:
+    <https://github.com/azrulhasni/E2E_ML/blob/main/scorecard/src/main/resources/application.properties>
+
+![](README.images/x0LuvY.jpg)
+
+-   Then, we need to create a file called DecisionConfig.java under the folder
+    \$E2E_ML/scorecard/src/main/java/com/azrul/ml/scorecard/common.
+
+-   This represents the Evaluator object which we will recycle for every
+    decision we need to make
+
+-   Code:
+    <https://github.com/azrulhasni/E2E_ML/blob/main/scorecard/src/main/java/com/azrul/ml/scorecard/common/DecisioningConfig.java>
+
+![](README.images/zXXWL6.jpg)
+
+-   (1) We create an Evaluator from our PMML file
+
+ 
+
+### Developing our micro-service: creating a service
+
+-   Next, we create a file called ScoreCardService.java in the folder
+    \$E2E_ML/scorecard/src/main/java/com/azrul/ml/scorecard/service
+
+-   This class represents a service that will be called by our web-facing
+    controller
+
+-   Code:
+    <https://github.com/azrulhasni/E2E_ML/blob/main/scorecard/src/main/java/com/azrul/ml/scorecard/service/ScoreCardService.java>
+
+![](README.images/8pVsuF.jpg)
+
+-   (1) Inject the Evaluator in
+
+    -   (2) Evaluate loan based on multiple features
+
+    -   (3) Evaluate loan based on single feature
+
+    -   (4) Actual method that does the work - we will translate the fields and
+        values sent in via our client and pass it to the Evaluator. The
+        Evaluator will run our decision tree (encoded in our PMML file) and
+        return urn a result to accept or reject the loan. What is interesting
+        here is the concept of id. When data was sent to us, we save the id in a
+        variable. We re-attach the id back to the response (decision) related to
+        said data. This way, the caller can match the input data with the
+        output.  
+        
+
+### Developing our micro-service: creating a web-facing restful controller
+
+-   Last but not least, let us create another file ScoreCardRestController.java
+    in the folder \$E2E_ML/scorecard/src/main/java/com/azrul/ml/web
+
+-   The ScoreCardReestController class represents our web-facing controller that
+    will expose our API
+
+-   Code:
+    <https://github.com/azrulhasni/E2E_ML/blob/main/scorecard/src/main/java/com/azrul/ml/scorecard/web/ScoreCardRestController.java>
+
+![](README.images/d4YRzw.jpg)
+
+-   (1) The URL we will use will be http://.../scorecard/api/\<service name\>
+
+    -   (2) We inject in the ScoreCardService we created earlier
+
+    -   (3) On the path /decisions, we will take multiple (an array) of data
+        points. We use HTTP GET as the service is stateless
+
+    -   (4) On the path /decision, we will take in only one data point. We use
+        HTTP GET again here
+
+ 
+
+### Compilation and deployment to Docker Hub
+
+-   Fire up your command line console and browse to \$E2E_ML/scorecard. Run the
+    command below
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> mvn clean install
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   This will compile our source code and generate a yml manifest file
+
+-   Correct any error that you have and then run
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> mvn compile com.google.cloud.tools:jib-maven-plugin:2.5.0:build
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   This will create a docker image and push it to Docker Hub. Go to Docker Hub
+    again and search for scorecard. You should see an item as per below
+
+![](README.images/yjmG5V.jpg)
+
+ 
+
+### Pulling the image from Docker Hub to Kubernetes and running the micro-service
+
+-   Browse to the folder \$E2E_ML/scorecard/target/classes/META-INF/dekorate and
+    open up the file Kubernetes.yml
+
+-   Locate the “image” field as per below:
+
+![](README.images/b8z4si.jpg)
+
+-   Change it to “image” : “\<your Docker Hub username\>/scorecard:latest”,
+
+-   Save it and fire up your command line console and point it to the same
+    dekorate folder
+
+-   Run:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> kubectl apply -f kubernetes.yml 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   This will download our container from Docker Hub and deploy it to our local
+    Kubernetes cluster
+
+-   To verify if it works, run the command
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> kubectl get deployments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   And you should see
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NAME        READY   UP-TO-DATE   AVAILABLE   AGE
+scorecard   0/1     1            0           88s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   Lets validate if our pod is running. Run the command
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> kubectl get pods
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   You should get the result as per below
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NAME                         READY   STATUS    RESTARTS   AGE
+scorecard-666694c8d6-9zgnv   1/1     Running   0          5m28s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
+
+### Exposing our pod
+
+-   Note that the way we expose the pod here is for testing purposes only. To
+    correctly expose a pod, we should use an ingress. Please refer to our
+    earlier tutorial to install a secure ingress
+    [<https://github.com/azrulhasni/Ebanking-JHipster-Keycloak-Nginx-K8#ingress-setup-and-security>]
+    and how to customise it to expose our pod
+    <https://github.com/azrulhasni/Ebanking-JHipster-Keycloak-Nginx-K8#exposing-keycloak-through-ingress>
+
+-   To expose our pod, run the command below
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>  kubectl get pods
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   You should get the result as per below
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NAME                         READY   STATUS    RESTARTS   AGE
+scorecard-666694c8d6-9zgnv   1/1     Running   0          5m28s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   Note down the name of the pod `scorecard-666694c8d6-9zgnv`
+
+-   Then run the command:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> kubectl port-forward scorecard-666694c8d6-9zgnv 18081
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   We will now have access to our micro-service pod
+
+-   Congratulations! Our micro-service is running and is callable
+
+ 
+
+ 
+
+Testing our scorecard
+---------------------
+
+ 
+
+### Running test on our API
+
+-   Let us get ourselves some json data. Recall that we exported a JSON file in
+    the Exporting test data to JSON parapgraph
+
+-   Let us take one of the data points and call our API with it. Fire up your
+    command line console and run the curl command below. Note that the `id` is
+    `153631`
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> curl --location --request GET 'http://localhost:18081/scorecard/api/decision' \
+--header 'Content-Type: application/json' \
+--data-raw '
+ {
+ "loan_amnt": 12000,
+ "funded_amnt": 12000,
+ "funded_amnt_inv": 12000,
+ "term": "60 months",
+ "int_rate": 10.75,
+ "installment": 259.42,
+ "annual_inc": 56000,
+ "pymnt_plan": "n",
+ "dti": 33.05,
+ "fico_range_low": 695,
+ "fico_range_high": 699,
+ "open_acc": 19,
+ "revol_bal": 164253,
+ "revol_util": 89,
+ "total_acc": 44,
+ "out_prncp": 5579.61,
+ "out_prncp_inv": 5579.61,
+ "total_pymnt": 9331.95,
+ "total_pymnt_inv": 9331.95,
+ "total_rec_prncp": 6420.39,
+ "total_rec_int": 2911.56,
+ "total_rec_late_fee": 0,
+ "recoveries": 0,
+ "collection_recovery_fee": 0,
+ "last_pymnt_amnt": 259.42,
+ "last_fico_range_high": 709,
+ "last_fico_range_low": 705,
+ "application_type": "Individual",
+ "tot_cur_bal": 372555,
+ "open_acc_6m": 0,
+ "open_act_il": 1,
+ "open_il_24m": 1,
+ "total_bal_il": 10079,
+ "il_util": 72,
+ "open_rv_12m": 0,
+ "open_rv_24m": 3,
+ "max_bal_bc": 13129,
+ "all_util": 89,
+ "total_rev_hi_lim": 184900,
+ "acc_open_past_24mths": 4,
+ "avg_cur_bal": 26611,
+ "bc_open_to_buy": 4875,
+ "bc_util": 67,
+ "mo_sin_old_rev_tl_op": 449,
+ "mo_sin_rcnt_rev_tl_op": 16,
+ "mo_sin_rcnt_tl": 10,
+ "mort_acc": 4,
+ "mths_since_recent_bc": 16,
+ "num_actv_bc_tl": 6,
+ "num_actv_rev_tl": 12,
+ "num_bc_sats": 17,
+ "num_bc_tl": 24,
+ "num_il_tl": 1,
+ "num_op_rev_tl": 12,
+ "num_rev_accts": 40,
+ "num_rev_tl_bal_gt_0": 12,
+ "num_sats": 14,
+ "num_tl_op_past_12m": 1,
+ "pct_tl_nvr_dlq": 84,
+ "percent_bc_gt_75": 50,
+ "tot_hi_cred_lim": 408588,
+ "total_bal_ex_mort": 34071,
+ "total_bc_limit": 29250,
+ "total_il_high_credit_limit": 14039,
+ "hardship_flag": "N",
+ "disbursement_method": "Cash",
+ "debt_settlement_flag": "N",
+ "id": 153631
+ } '
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   We should get the reply below
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "Predicted_target" : "true",
+  "Probability_TRUE" : 0.9859415104482743,
+  "id" : 153631,
+  "Probability_FALSE" : 0.01405848955172577,
+  "target" : true
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   We also have another API that takes in multiple data points. Let us try that
+    one also. Note that you need to send in an array of JSON objects (i.e. the
+    JSON object would be in square brackets)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> curl --location --request GET 'localhost:18081/scorecard/api/decisions' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+    {
+        "loan_amnt": 12000,
+        "funded_amnt": 12000,
+        "funded_amnt_inv": 12000,
+        "term": "60 months",
+        "int_rate": 10.75,
+        "installment": 259.42,
+        "annual_inc": 56000,
+        "pymnt_plan": "n",
+        "dti": 33.05,
+        "fico_range_low": 695,
+        "fico_range_high": 699,
+        "open_acc": 19,
+        "revol_bal": 164253,
+        "revol_util": 89,
+        "total_acc": 44,
+        "out_prncp": 5579.61,
+        "out_prncp_inv": 5579.61,
+        "total_pymnt": 9331.95,
+        "total_pymnt_inv": 9331.95,
+        "total_rec_prncp": 6420.39,
+        "total_rec_int": 2911.56,
+        "total_rec_late_fee": 0,
+        "recoveries": 0,
+        "collection_recovery_fee": 0,
+        "last_pymnt_amnt": 259.42,
+        "last_fico_range_high": 709,
+        "last_fico_range_low": 705,
+        "application_type": "Individual",
+        "tot_cur_bal": 372555,
+        "open_acc_6m": 0,
+        "open_act_il": 1,
+        "open_il_24m": 1,
+        "total_bal_il": 10079,
+        "il_util": 72,
+        "open_rv_12m": 0,
+        "open_rv_24m": 3,
+        "max_bal_bc": 13129,
+        "all_util": 89,
+        "total_rev_hi_lim": 184900,
+        "acc_open_past_24mths": 4,
+        "avg_cur_bal": 26611,
+        "bc_open_to_buy": 4875,
+        "bc_util": 67,
+        "mo_sin_old_rev_tl_op": 449,
+        "mo_sin_rcnt_rev_tl_op": 16,
+        "mo_sin_rcnt_tl": 10,
+        "mort_acc": 4,
+        "mths_since_recent_bc": 16,
+        "num_actv_bc_tl": 6,
+        "num_actv_rev_tl": 12,
+        "num_bc_sats": 17,
+        "num_bc_tl": 24,
+        "num_il_tl": 1,
+        "num_op_rev_tl": 12,
+        "num_rev_accts": 40,
+        "num_rev_tl_bal_gt_0": 12,
+        "num_sats": 14,
+        "num_tl_op_past_12m": 1,
+        "pct_tl_nvr_dlq": 84,
+        "percent_bc_gt_75": 50,
+        "tot_hi_cred_lim": 408588,
+        "total_bal_ex_mort": 34071,
+        "total_bc_limit": 29250,
+        "total_il_high_credit_limit": 14039,
+        "hardship_flag": "N",
+        "disbursement_method": "Cash",
+        "debt_settlement_flag": "N",
+        "id": 153631
+    },{
+        "loan_amnt": 19200,
+        "funded_amnt": 19200,
+        "funded_amnt_inv": 19200,
+        "term": "60 months",
+        "int_rate": 18.25,
+        "installment": 490.17,
+        "annual_inc": 190413,
+        "pymnt_plan": "n",
+        "dti": 27.43,
+        "fico_range_low": 705,
+        "fico_range_high": 709,
+        "open_acc": 11,
+        "revol_bal": 31581,
+        "revol_util": 47.4,
+        "total_acc": 30,
+        "out_prncp": 0,
+        "out_prncp_inv": 0,
+        "total_pymnt": 12254.73,
+        "total_pymnt_inv": 12254.73,
+        "total_rec_prncp": 5408.13,
+        "total_rec_int": 5826.85,
+        "total_rec_late_fee": 0,
+        "recoveries": 1019.75,
+        "collection_recovery_fee": 183.555,
+        "last_pymnt_amnt": 490.17,
+        "last_fico_range_high": 529,
+        "last_fico_range_low": 525,
+        "application_type": "Individual",
+        "tot_cur_bal": 208668,
+        "total_rev_hi_lim": 66600,
+        "acc_open_past_24mths": 9,
+        "avg_cur_bal": 20867,
+        "bc_open_to_buy": 13812,
+        "bc_util": 16.8,
+        "mo_sin_old_rev_tl_op": 208,
+        "mo_sin_rcnt_rev_tl_op": 11,
+        "mo_sin_rcnt_tl": 10,
+        "mort_acc": 7,
+        "mths_since_recent_bc": 11,
+        "num_actv_bc_tl": 3,
+        "num_actv_rev_tl": 6,
+        "num_bc_sats": 4,
+        "num_bc_tl": 7,
+        "num_il_tl": 12,
+        "num_op_rev_tl": 7,
+        "num_rev_accts": 11,
+        "num_rev_tl_bal_gt_0": 6,
+        "num_sats": 11,
+        "num_tl_op_past_12m": 8,
+        "pct_tl_nvr_dlq": 96.6,
+        "percent_bc_gt_75": 0,
+        "tot_hi_cred_lim": 271243,
+        "total_bal_ex_mort": 208668,
+        "total_bc_limit": 16600,
+        "total_il_high_credit_limit": 204643,
+        "hardship_flag": "N",
+        "disbursement_method": "Cash",
+        "debt_settlement_flag": "N",
+        "id": 262922
+    }]'
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   We will then get the results below
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ {
+  "Predicted_target" : "true",
+  "Probability_TRUE" : 0.9859415104482743,
+  "id" : 153631,
+  "Probability_FALSE" : 0.01405848955172577,
+  "target" : true
+}, {
+  "Predicted_target" : "false",
+  "Probability_TRUE" : 0.00401354333105075,
+  "id" : 262922,
+  "Probability_FALSE" : 0.9959864566689492,
+  "target" : false
+} ]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
+
+ 
+
+### Validating decisions with R
+
+-   If we call the the same decision tree with the same input in R, we should
+    get the same result as above. So let us try it out
+
+-   Let us evaluate id=153631
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> predict(fit,subset(testdata,testdata$id==153631))
+       FALSE      TRUE
+1 0.01405849 0.9859415
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   And one more time for id=262922
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> predict(fit,subset(testdata,testdata$id==262922))
+      FALSE        TRUE
+1 0.9959865 0.004013543
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   And we can see that the answer are equal (with some rounding)  to the result
+    we obtained from our java micro-service.
+
+ 
+
+### Conclusion
+
+We started our journey by picking up credit lifecycle management as the example
+of real world data science. We then proceed to download real world data and
+wrangle it to fit our business outcome and purpose.
+
+We then use the humble decision tree algorithm to build a machine learning
+model. We then proceed to test the model and start tweaking the model as needed.
+Once we were satisfied with the result, we export the model to PMML file
+
+We then build a micro service exposing an API for us to call to make a loan
+application decision. The micro-service would use our PMML file to rebuild the
+decision tree we had, inside our micro-service. It then uses the decision tree
+to make decision. Last but not least, we compare the result of the micro-service
+with what we had in R - and they seem to match. Making us a very happy camper :)
+
+As we said in the beginning of the journey, data science is varied and mind
+boggling even. This end to end walkthrough will allow you to experience and see
+how data science, a very small part of it, works.

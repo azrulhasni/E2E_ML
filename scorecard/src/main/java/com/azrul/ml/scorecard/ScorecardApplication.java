@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@KubernetesApplication(ports = @Port(name = "scorecard", containerPort = 18081))
 public class ScorecardApplication {
 
 	public static void main(String[] args) {
