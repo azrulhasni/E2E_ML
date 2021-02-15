@@ -33,14 +33,13 @@ seems to be closer to art than science.
 
  
 
-In this series of article, we would walk through some aspects of data science
-end to end. Of course I do not pretend to master all aspects of data science,
-nor do I claim that what I would write is the one true way of data science, nor
-that what I propose here is complete and flawless. Rather, I would like to help
-highlight how data science could work in an end to end manner. Starting from
-(some form of) data wrangling, to machine learning, to model deployment and API
-development, we will explore together the tools and mindset of data science end
-to end.
+In this article, we would walk through some aspects of data science end to end.
+Of course, I do not pretend to master all aspects of data science, nor do I
+claim that what I would write is the one true way of data science, nor that what
+I propose here is complete and flawless. Rather, I would like to help highlight
+how data science could work / have worked in an end to end manner. Starting from
+data wrangling, to machine learning, to model deployment and API development, we
+will explore together the tools and mindset of data science end to end.
 
  
 
@@ -51,21 +50,24 @@ Well, this appeared in my news feed a few days ago:
 
 ![](README.images/Xsxts4.jpg)
 
-Both Java developers and data scientists have the best rated job - so, why don’t
-we combine those together and created the best of the best rated article -
-talking about data science at the beginning, and continue with Java development
-towards the end :)
+<~
+https://www.zdnet.com/article/java-developers-data-scientists-have-the-best-rated-jobs-according-to-glassdoor-analysis/>
 
  
+
+Both Java developers and data scientists have the best rated job - so, why don’t
+we combine those together and create the best of the best rated article -
+talking about data science at the beginning, and continue with Java development
+towards the end :)
 
  
 
 The business problem
 --------------------
 
-Database a science is applied in many ways with many different workflows. In
-this article, we are going to focus on one : credit lifecycle - i.e. the usage
-of machine learning to determine the risk of a loan. Hopefully what is presented
+Data science is applied in many ways with many different workflows. In this
+article, we are going to focus on one : credit lifecycle - i.e. the usage of
+machine learning to determine the risk of a loan. Hopefully what is presented
 here is generic enough for you to use it in your own endeavour and use cases.
 
  
@@ -98,7 +100,8 @@ completion.
     Account System.
 
 4.  As the customer pays the loan, her credit behaviour is captured by the Loan
-    Account System. This data is then conveyed to the data warehouse.
+    Account System. For example, did he skip on any of his payments. This data
+    is then conveyed to the data warehouse.
 
 5.  A data scientist would access this behaviour data and use magical machine
     learning algorithms to come up with a machine learning model.
@@ -140,8 +143,7 @@ Our objective is to walk through part of the credit lifecycle
     API. We will explore some tools and techniques here.
 
 4.  Last but not least, we will test the API to make a few credit scoring
-    decision. We will also put the model under performance test to see how it
-    fares under load
+    decision.
 
  
 
@@ -163,17 +165,13 @@ enough that you will find its equivalent in your favourite platform:
 
 -   Deployment: Docker on Kubernetes
 
--   Performance test: JMeter
-
  
 
 ### Directory
 
 This is the organisation of our directory
 
-\$PROJECTS
-
-\|- E2E_ML
+\$E2E_ML
 
 \|- scorecard
 
@@ -204,7 +202,7 @@ where we will put our Java Spring Boot project.
 ![](README.images/f0HqaC.jpg)
 
 -   From the top menu, choose Session \> Set Working Directory \> Choose
-    Directory… .Then choose \$PROJECTS/E2E_ML directory
+    Directory… .Then choose \$E2E_ML directory
 
  
 
@@ -302,8 +300,7 @@ Data loading and wrangling
 
 -   Point your browser to Kaggle’s lending club data page
     [<https://www.kaggle.com/wordsforthewise/lending-club>] and download the
-    accepted_2007_to_2018Q4.csv.gz file and put it in the \$PROJECTS/E2E_ML
-    folder.
+    accepted_2007_to_2018Q4.csv.gz file and put it in the \$E2E_ML folder.
 
  
 
@@ -567,14 +564,14 @@ Data loading and wrangling
 -   Features are data (columns rather) used by a machine learning model to make
     a decision (please refer to the paragraph How Machine Learning Works)
 
--   Some features (i.e. columns) are not useful for our model training. This is
-    because they do not generalised properly to contribute to the overall
-    decision. Selecting the right features is important because the complexity
-    (and duration) of our training will depend on how many features we accept as
-    part of our training data
+-   Some features are not useful for our model training. This is because they do
+    not generalised properly to contribute to the overall decision. Selecting
+    the right features is important because the complexity (and duration) of our
+    training will depend on how many features we accept as part of our training
+    data
 
--   The work to reduce features (i.e. columns) is called feature selection. In
-    this article we will take a look at one of them. You may want to visit
+-   The work to reduce features is called feature selection. In this article we
+    will take a look at one of them. You may want to visit
     <https://www.machinelearningplus.com/machine-learning/feature-selection/>
     for other varieties of feature selection techniques and libraries
 
@@ -597,16 +594,16 @@ Data loading and wrangling
 
 -   Boruta will take a long time to run, so we cannot put all our data to it.
     Rather, we would take a sample and train Boruta with that sample. Note, even
-    at 60000 rows of data, Boruta might still take half a day to complete
+    at 60000 rows of data, Boruta might still take half a day to complete. If
+    you want to skip the Boruta training step, please use the intermediary data
+    here
+    <https://github.com/azrulhasni/E2E_ML/blob/main/intermediary_data.RData>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > smplddata <- data4boruta[sample(nrow(data4boruta), 60000), ]  #sample 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--   We then train Boruta with the sampled copy of our data. Note that Boruta
-    will take a while to complete. If you want to skip this step, please use the
-    intermediary data here
-    <https://github.com/azrulhasni/E2E_ML/blob/main/intermediary_data.RData>
+-   We then train Boruta with the sampled copy of our data
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > boruta_output <- Boruta(target ~ ., data=smplddata, doTrace=2, maxRuns=20)   
@@ -655,7 +652,7 @@ Data loading and wrangling
 
 -   As we can see, we have here a list of significant features (columns). Let us
     now filter out all other columns. Note the absent of ! in front of
-    `colnames`.
+    `colnames` below
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > data <- data[, colnames(data) %in% boruta_signif]
@@ -948,7 +945,7 @@ credit lifecycle.
 1.  Some of the columns are not numeric such `term`, `payment_plan` and
     `hardship_flag`
 
-2.  Some of the column has empty values such as `revol_util, total_acc` and
+2.  Some of the column have empty values such as `revol_util, total_acc` and
     `open_acc`
 
  
@@ -958,13 +955,13 @@ credit lifecycle.
 
     -   Classic and therefore you will find its implementation everywhere
 
-    -   Supported by PMML without too much twaek
+    -   Supported by PMML without too much tweak
 
     -   Not too many knobs too manipulate to get a good enough answer
 
     -   An ensemble of trees can be created to increase decisioning power
 
-    -   It is also my favourtite algorithm :)
+    -   It is also my favourite algorithm :)
 
  
 
@@ -978,7 +975,7 @@ credit lifecycle.
     for testing. Usually, the training data is bigger than testing
 
 -   Make sure we shuffle our data before splitting - this is to ensure that no
-    concentration of label exist in either training nor testing.
+    concentration of label exist in neither training nor testing.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > data <- data[sample(nrow(data)),] #shuffle
@@ -989,8 +986,8 @@ credit lifecycle.
 > testdata <- data[u:v,]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--   The variable`testdata` will contain our test data and the
-    variable`traindata` will contain our training data
+-   The variable` testdata` will contain our test data and the variable
+    `traindata` will contain our training data
 
  
 
@@ -1000,7 +997,7 @@ credit lifecycle.
     end up with is a tree**. It will take some time to finish. Once done, our
     decision tree is contained in the variable `fit`. Do note that training a
     decision tree will take a while. If you want to skip this step, you can get
-    the` fit `variable here
+    the`fit`variable here
     <https://github.com/azrulhasni/E2E_ML/blob/main/intermediary_data.RData>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1011,9 +1008,9 @@ credit lifecycle.
 +)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--   Yup, that is it. All the trouble for that line of code.
+-   Yup, that is it. All the trouble for that few lines of code.
 
--   The parameter `method = ‘class’`designate that we are doing classification.
+-   The parameter `method = ‘class’ `designate that we are doing classification.
     We can also use the decision tree for regression.
 
 -   The parameter `cp` is the complexity parameter. The lower it is, the deeper
@@ -1283,10 +1280,9 @@ Discussion: Imbalanced classification
 
 -   In this technique, we would take a look at our majority class (i.e.
     data\$target==TRUE) and randomly sample a smaller population of data from it
-
-    -   the same size as our minority class. We then train our model based on
-        this sample data instead of the full data. **Note that this sampling is
-        only needed for the training data. We can leave test data alone.**
+    the same size as our minority class. We then train our model based on this
+    sample data instead of the full data. **Note that this sampling is only
+    needed for the training data. We can leave test data alone.**
 
 ![](README.images/PdE3ag.jpg)
 
@@ -1654,15 +1650,15 @@ Effective user-specific configuration settings:
 
 ### Developing our micro-service: specifying dependencies
 
--   In the folder \$E2E_ML/scorecard make sure the pom.xml, add the dependencies
+-   In the file \$E2E_ML/scorecard/pom.xml make sure the we add the dependencies
     here and the jib-maven-plugin plugin. The dependencies are:
 
     1.  JPMML: to interpret and execute our PMML file
 
     2.  Decorate: To create our Kubernetes manifest file
 
-    3.  The plugin  jib-maven-plugin: Use to create a docker image and exporting
-        it to Docker Hub. Replace the tag `<your dockerhub username>` below with
+    3.  The plugin jib-maven-plugin: Use to create a docker image and exporting
+        it to Docker Hub. Replace the tag \<your dockerhub username\> below with
         your own Docker Hub user name.
 
      
@@ -1807,21 +1803,19 @@ Effective user-specific configuration settings:
 
 ![](README.images/8pVsuF.jpg)
 
--   (1) Inject the Evaluator in
+-   Inject the Evaluator in
 
-    -   (2) Evaluate loan based on multiple features
+    -   Evaluate loan based on multiple features
 
-    -   (3) Evaluate loan based on single feature
+    -   Evaluate loan based on single feature
 
-    -   (4) Actual method that does the work - we will translate the fields and
-        values sent in via our client and pass it to the Evaluator. The
-        Evaluator will run our decision tree (encoded in our PMML file) and
-        return urn a result to accept or reject the loan. What is interesting
-        here is the concept of id. When data was sent to us, we save the id in a
-        variable. We re-attach the id back to the response (decision) related to
-        said data. This way, the caller can match the input data with the
-        output.  
-        
+    -   Actual method that does the work - we will translate the fields and
+        values sent in by our client and pass it to the Evaluator. The Evaluator
+        will run our decision tree (encoded in our PMML file) and return urn a
+        result to accept or reject the loan. What is interesting here is the
+        concept of id. When data was sent to us, we save the id in a variable.
+        We re-attach the id back to the response (decision) related to said
+        data. This way, the caller can match the input data with the output.
 
 ### Developing our micro-service: creating a web-facing restful controller
 
@@ -1836,15 +1830,15 @@ Effective user-specific configuration settings:
 
 ![](README.images/d4YRzw.jpg)
 
--   (1) The URL we will use will be http://.../scorecard/api/\<service name\>
+-   The URL we will use will be http://.../scorecard/api/\<service name\>
 
-    -   (2) We inject in the ScoreCardService we created earlier
+    -   We inject in the ScoreCardService we created earlier
 
-    -   (3) On the path /decisions, we will take multiple (an array) of data
-        points. We use HTTP GET as the service is stateless
+    -   On the path /decisions, we will take multiple (an array) of data points.
+        We use HTTP GET as the service is stateless
 
-    -   (4) On the path /decision, we will take in only one data point. We use
-        HTTP GET again here
+    -   On the path /decision, we will take in only one data point. We use HTTP
+        GET again here
 
  
 
@@ -1908,7 +1902,7 @@ NAME        READY   UP-TO-DATE   AVAILABLE   AGE
 scorecard   0/1     1            0           88s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--   Lets validate if our pod is running. Run the command
+-   Let us validate if our pod is running. Run the command
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > kubectl get pods
@@ -1927,7 +1921,7 @@ scorecard-666694c8d6-9zgnv   1/1     Running   0          5m28s
 
 -   Note that the way we expose the pod here is for testing purposes only. To
     correctly expose a pod, we should use an ingress. Please refer to our
-    earlier tutorial to install a secure ingress
+    earlier tutorial to learn how to install a secure ingress
     [<https://github.com/azrulhasni/Ebanking-JHipster-Keycloak-Nginx-K8#ingress-setup-and-security>]
     and how to customise it to expose our pod
     <https://github.com/azrulhasni/Ebanking-JHipster-Keycloak-Nginx-K8#exposing-keycloak-through-ingress>
@@ -1953,7 +1947,7 @@ scorecard-666694c8d6-9zgnv   1/1     Running   0          5m28s
 > kubectl port-forward scorecard-666694c8d6-9zgnv 18081
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--   We will now have access to our micro-service pod
+-   We will now have access to our micro-service pod at port 18081
 
 -   Congratulations! Our micro-service is running and is callable
 
@@ -1968,8 +1962,8 @@ Testing our scorecard
 
 ### Running test on our API
 
--   Let us get ourselves some json data. Recall that we exported a JSON file in
-    the Exporting test data to JSON parapgraph
+-   Let us get ourselves some JSON data. Recall that we exported a JSON file in
+    the Exporting test data to JSON paragraph
 
 -   Let us take one of the data points and call our API with it. Fire up your
     command line console and run the curl command below. Note that the `id` is
@@ -2201,7 +2195,6 @@ Testing our scorecard
         "debt_settlement_flag": "N",
         "id": 262922
     }]'
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -   We will then get the results below
@@ -2231,6 +2224,9 @@ Testing our scorecard
 -   If we call the the same decision tree with the same input in R, we should
     get the same result as above. So let us try it out
 
+-   Fire up R and use our testdata (If you lose your data, remember we made a
+    copy - just reload input.csv)
+
 -   Let us evaluate id=153631
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2247,7 +2243,7 @@ Testing our scorecard
 1 0.9959865 0.004013543
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--   And we can see that the answer are equal (with some rounding)  to the result
+-   And we can see that the answer are equal (with some rounding) to the result
     we obtained from our java micro-service.
 
  
