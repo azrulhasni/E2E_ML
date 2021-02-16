@@ -50,8 +50,8 @@ Well, this appeared in my news feed a few days ago:
 
 ![](README.images/Xsxts4.jpg)
 
-<~
-https://www.zdnet.com/article/java-developers-data-scientists-have-the-best-rated-jobs-according-to-glassdoor-analysis/>
+\<\~
+https://www.zdnet.com/article/java-developers-data-scientists-have-the-best-rated-jobs-according-to-glassdoor-analysis/\>
 
  
 
@@ -651,8 +651,7 @@ Data loading and wrangling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -   As we can see, we have here a list of significant features (columns). Let us
-    now filter out all other columns. Note the absent of ! in front of
-    `colnames` below
+    now filter out all other columns.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > data <- data[, colnames(data) %in% boruta_signif]
@@ -694,7 +693,7 @@ Data loading and wrangling
     `last_credit_pull_d` and `last_pymnt_d`. Dates columns cannot be used in
     learning. For example: we identify that loans applied between 1-Jan-2008 and
     1-Feb-2008 would become bad loans, well, no new loans (beyond 2020) will
-    trigger that condition. Because of this we will delete these two columns
+    trigger that condition. Because of this we will delete these columns
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > data <- subset(data, select=-c(issue_d, last_credit_pull_d,last_pymnt_d)) #take out the unneded column
@@ -708,7 +707,7 @@ Data loading and wrangling
 Machine Learning Model Training and Testing
 -------------------------------------------
 
-Finally, we got to do some magic! Let us recall where is this process in the
+Finally, we got to do some magic! Let us recall where this process is in the
 credit lifecycle.
 
 ![](README.images/HpAZgd.jpg)
@@ -986,7 +985,7 @@ credit lifecycle.
 > testdata <- data[u:v,]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--   The variable` testdata` will contain our test data and the variable
+-   The variable`testdata` will contain our test data and the variable
     `traindata` will contain our training data
 
  
@@ -1010,7 +1009,7 @@ credit lifecycle.
 
 -   Yup, that is it. All the trouble for that few lines of code.
 
--   The parameter `method = ‘class’ `designate that we are doing classification.
+-   The parameter `method = ‘class’`designate that we are doing classification.
     We can also use the decision tree for regression.
 
 -   The parameter `cp` is the complexity parameter. The lower it is, the deeper
@@ -1786,7 +1785,7 @@ Effective user-specific configuration settings:
 
 ![](README.images/zXXWL6.jpg)
 
--   (1) We create an Evaluator from our PMML file
+-   We create an Evaluator from our PMML file
 
  
 
